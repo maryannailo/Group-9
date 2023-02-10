@@ -1,23 +1,22 @@
-/*public enum Tile {
-FORREST(ColourDisplay.DARKGREEN + "▄", TileColour.DARKGREEN);
-WETLAND(ColourDisplay.LIGHTGREEN + "▄" TileColour.LIGHTGREEN),
-RIVER(ColourDisplay.BLUE + "▄" TileColour.BLUE),
-MOUNTAIN(ColourDisplay.GREY + "▄" TileColour.GREY),
-PRAIRIE(ColourDisplay.YELLOW + "▄" TileColour.YELLOW),
+public enum Tile {
+    FOREST(DisplayColour.DARKGREEN + "  ", TileColour.DARKGREEN),
+    WETLAND(DisplayColour.LIGHTGREEN + "    ", TileColour.LIGHTGREEN),
+    RIVER(DisplayColour.BLUE + "    ", TileColour.BLUE),
+    MOUNTAIN(DisplayColour.GREY + "     ", TileColour.GREY),
+    PRAIRIE(DisplayColour.YELLOW + "    ", TileColour.YELLOW);
 
 
+    private TileColour colour;
+    private String symbol;
 
-private String block;
-private TileColour colour;
-    Tile(String block, TileColour colour) {
-        this.block = block;
+    Tile (String symbol, TileColour colour) {
+        this.symbol = symbol;
         this.colour = colour;
     }
 
-    public TileColour getColour(){
+    public TileColour getColour () {
         return colour;
     }
-    public String getBlock(){
-        return block;
-    }
-}*/
+    public String toString(){return symbol;}
+}
+

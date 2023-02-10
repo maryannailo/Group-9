@@ -1,7 +1,7 @@
 public enum TileColour {
-    DARKGREEN,
     LIGHTGREEN,
+    DARKGREEN,
     BLUE,
     GREY,
-    YELLOW
+    YELLOW,
 }

@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Collections;
-
+import java.util.*;
 
 public class User{
     private final int numofUsers;
     public ArrayList<String> userNames;
     public int userTurn;
+    private ArrayList<Tile> tiles;
 
    public User(){
        Scanner number = new Scanner(System.in);
@@ -34,7 +32,15 @@ public class User{
            System.out.print(userNames.get(i));
            System.out.println(" = "+ userTurn);
        }
-       System.out.println(userTurn);
+
+       tiles = new ArrayList<>(List.of(Tile.values()));
+       Collections.shuffle(tiles);
+       System.out.println("The Tiles have been randomly assigned to the players as follows:");
+       for (int i = 0; i < userNames.size(); i++) {
+           System.out.println(userNames.get(i) + ": " + tiles.get(i));
+       }
+
+
    }
 
 }
