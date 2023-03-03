@@ -1,0 +1,25 @@
+public enum TilesAndTokens {
+    FOREST(DisplayColour.DARKGREEN + "  ", TilesAndTokensColour.DARKGREEN),
+    WETLAND(DisplayColour.LIGHTGREEN + "    ", TilesAndTokensColour.LIGHTGREEN),
+    RIVER(DisplayColour.BLUE + "    ", TilesAndTokensColour.BLUE),
+    MOUNTAIN(DisplayColour.GREY + "     ", TilesAndTokensColour.GREY),
+    PRAIRIE(DisplayColour.YELLOW + "    ", TilesAndTokensColour.YELLOW),
+
+    HAWK(DisplayColour.BLUE + " ", TilesAndTokensColour.BLUE),
+    BEAR(DisplayColour.BROWN + " ", TilesAndTokensColour.BROWN),
+    ELK(DisplayColour.BLACK + " ", TilesAndTokensColour.BLACK),
+    SALMON(DisplayColour.RED + " ", TilesAndTokensColour.RED),
+    FOX(DisplayColour.ORANGE + " ", TilesAndTokensColour.ORANGE);
+    private TilesAndTokensColour colour;
+    private String symbol;
+
+    TilesAndTokens (String symbol, TilesAndTokensColour colour) {
+        this.symbol = symbol;
+        this.colour = colour;
+    }
+
+    public TilesAndTokensColour getColour () {
+        return colour;
+    }
+    public String toString(){return symbol;}
+}
