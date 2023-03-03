@@ -1,0 +1,23 @@
+public enum HabitatAndWildlife {
+    FOREST("FT "),
+    WETLAND("W "),
+    RIVER("R "),
+    MOUNTAIN("M "),
+    PRAIRIE("P "),
+
+    HAWK("H "),
+    BEAR("B "),
+    ELK("E "),
+    SALMON("S "),
+    FOX("FX");
+
+    private String symbol;
+
+    HabitatAndWildlife (String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String toString () {
+        return symbol;
+    }
+}
