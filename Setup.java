@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Setup
@@ -8,6 +9,23 @@ public class Setup
     void addUser(User user)
     {
         userList.add(user);
+    
+    User getUserByTurn(int turn) {
+        for (User user : userList) {
+            if (user.getTurn() == turn) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    int turnCalculation() {
+        List<Integer> turns = new ArrayList<>();
+        for (int i = 1; i <= userList.size(); i++) {
+            turns.add(i);
+        }
+        Collections.shuffle(turns);
+        return turns.get(0);
     }
 
     private void showUserTiles(String name)
