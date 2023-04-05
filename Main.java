@@ -20,9 +20,12 @@ public class Main
             System.out.println("Please enter the Number of Players playing 2-4");
             try {
                 numPlayers = scan.nextInt();
-                scan.nextLine(); // do this to clear input buffer 
+                scan.nextLine(); // do this to clear input buffer
+                if (numPlayers < 2 || numPlayers > 4) {
+                    throw new NumberFormatException();
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number between2 and 4.");
+                System.out.println("Invalid input.");
             }
         }
        
