@@ -6,7 +6,7 @@ public class Display {
         System.out.println("Welcome to Cascadia!");
         System.out.println("");
         System.out.println("The aim of the game is to create the most harmonious ecosystem by selecting and adding habitats and wildlife to your environment.");
-        System.out.println("This is done by placing habitat tokens between pil");
+        System.out.println("This is done by placing habitat tokens between pil"); // continue summary of rules
 
     }
     public void displayPlayNotPossible () {
