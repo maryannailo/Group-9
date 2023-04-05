@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Display {
+
+    public void displayWelcome() {
+        System.out.println("Welcome to Cascadia!");
+        System.out.println("");
+        System.out.println("The aim of the game is to create the most harmonious ecosystem by selecting and adding habitats and wildlife to your environment.");
+        System.out.println("This is done by placing habitat tokens between pil");
+
+    }
+    public void displayPlayNotPossible () {
+        System.out.println("That play is not possible. Try again.");
+    }
+
+    public void displayCommandNotPossible () {
+        System.out.println("Invalid command. Please enter 1, 2, or 3.");
+    }
+
+    public void displayQuit () {
+        System.out.println("Thank you for playing Cascadia!");
+        System.out.println("Quit.");
+    }
+
+}
