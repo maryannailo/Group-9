@@ -55,6 +55,9 @@ public class Main
             switch(choice)
             {
                 case 1: //Play turn
+                    System.out.println("Your starter habitat tiles are: " + setup.setStarterHabitatTile());
+                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
+                    System.out.println("Your wildlife tokens are: " + setup.wildlifeTokens());
 
                 case 2: //Skip turn
                     turnCounter = (turnCounter % numPlayers) + 1;
