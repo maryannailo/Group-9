@@ -31,7 +31,7 @@ public class Main
        
         for(int x = 1; x<=numPlayers; x++)
         {
-            System.out.println("Please enter player " + x + "'s name");
+            System.out.println("Please enter player " + x + "'s name:");
             name = scan.nextLine();
             User user = new User(name, x);
             setup.addUser(user);
