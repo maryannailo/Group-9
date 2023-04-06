@@ -1,26 +1,30 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 public class Main
 {
     static Setup setup = new Setup();
     static Display display = new Display();
-    
+
     public static void main(String[] args)
     {
         display.displayWelcome();
-        
+
         Scanner scan = new Scanner(System.in);
-        int numPlayers = 0;
         int choice = 0;
         String name;
         int turn;
         int turnCounter;
-        
-        //Add Error handling incase number inputed is not between 2 and 4
+        int numPlayers = 0;
+        List<List<TilesAndTokens>> allStarterTiles = new ArrayList<>();
+
         while (numPlayers < 2 || numPlayers > 4) {
+            //Add Error handling incase number inputed is not between 2 and 4
             System.out.println("Please enter the Number of Players playing 2-4");
             try {
                 numPlayers = scan.nextInt();
-                scan.nextLine(); // do this to clear input buffer
+                scan.nextLine(); // to clear input buffer
                 if (numPlayers < 2 || numPlayers > 4) {
                     throw new NumberFormatException();
                 }
@@ -28,7 +32,8 @@ public class Main
                 System.out.println("Invalid input.");
             }
         }
-       
+
+
         for(int x = 1; x<=numPlayers; x++)
         {
             System.out.println("Please enter player " + x + "'s name:");
@@ -36,9 +41,12 @@ public class Main
             User user = new User(name, x);
             setup.addUser(user);
             //Add users
+            List<TilesAndTokens> userStarterTile = setup.setStarterHabitatTile(user);
+            allStarterTiles.add(userStarterTile);
         }
 
         turnCounter = setup.turnCalculation();
+
 
         while(choice!=3)
         {
@@ -51,12 +59,13 @@ public class Main
             System.out.println("3. Quit");
             choice = scan.nextInt();
 
+            
             //Print out the name of the current persons turn and what turn it is
             switch(choice)
             {
                 case 1: //Play turn
-                    System.out.println("Your starter habitat tiles are: " + setup.setStarterHabitatTile());
-                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
+                    List<TilesAndTokens> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
+                    System.out.println("Your starter tile is: " + currentStarterTiles);                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
                     System.out.println("Your wildlife tokens are: " + setup.wildlifeTokens());
 
                 case 2: //Skip turn
@@ -66,12 +75,11 @@ public class Main
                 case 3: // Exit
                     display.displayQuit();
                     break;
-                    
                 default:
                     display.displayCommandNotPossible();
                     break;
             }
-            
+
         }
 
     }
