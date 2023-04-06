@@ -27,6 +27,22 @@ public class Setup
         Collections.shuffle(turns);
         return turns.get(0);
     }
+    
+    ArrayList<TilesAndTokens> setStarterHabitatTile() {
+        ArrayList<TilesAndTokens> habitatTiles = new ArrayList<>();
+        // add all available starter tiles to the list
+        habitatTiles.add(TilesAndTokens.FOREST);
+        habitatTiles.add(TilesAndTokens.WETLAND);
+        habitatTiles.add(TilesAndTokens.RIVER);
+        habitatTiles.add(TilesAndTokens.MOUNTAIN);
+        habitatTiles.add(TilesAndTokens.PRAIRIE);
+        // shuffle the list and select the first two objects as the user's starter tile
+        Collections.shuffle(habitatTiles);
+        ArrayList<TilesAndTokens> starterTiles = new ArrayList<>();
+        starterTiles.add(habitatTiles.get(0));
+        starterTiles.add(habitatTiles.get(1));
+        return starterTiles;
+    }
 
     private void showUserTiles(String name)
     {
