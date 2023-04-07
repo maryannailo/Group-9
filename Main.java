@@ -53,10 +53,7 @@ public class Main
             User currentUser = setup.getUserByTurn(turnCounter);
             System.out.println("");
             System.out.println("It is " + currentUser.getName() + "'s turn.");
-            System.out.println("What would you like to do?");
-            System.out.println("1. Play turn");
-            System.out.println("2. Next player");
-            System.out.println("3. Quit");
+            display.displayMenu();
             choice = scan.nextInt();
 
             
@@ -65,7 +62,8 @@ public class Main
             {
                 case 1: //Play turn
                     List<TilesAndTokens> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
-                    System.out.println("Your starter tile is: " + currentStarterTiles);                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
+                    System.out.println("Your starter tile is: " + currentStarterTiles);                    
+                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
                     System.out.println("Your wildlife tokens are: " + setup.wildlifeTokens());
 
                 case 2: //Skip turn
