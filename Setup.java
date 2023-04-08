@@ -56,7 +56,7 @@ public class Setup
     }
 
     // Return the starter tile for each user
-     ArrayList<TilesAndTokens> setStarterHabitatTile() {
+     ArrayList<TilesAndTokens> setStarterHabitatTile(User user) {
         ArrayList<TilesAndTokens> habitatTiles = habitats();
         // shuffle the list and select the first two objects as the user's starter tile
         Collections.shuffle(habitatTiles);
