@@ -4,6 +4,11 @@ public enum HabitatAndWildlife {
     RIVER("R"),
     MOUNTAIN("M"),
     PRAIRIE("P"),
+    FORESTKEY("FT\uD83D\uDDDD️"),
+    WETLANDKEY("W\uD83D\uDDDD️"),
+    RIVERKEY("R\uD83D\uDDDD️"),
+    MOUNTAINKEY("M\uD83D\uDDDD️"),
+    PRAIRIEKEY("P\uD83D\uDDDD️"),
 
     HAWK("H"),
     BEAR("B"),
