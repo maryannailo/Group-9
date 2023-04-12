@@ -4,12 +4,17 @@ public enum TilesAndTokens {
     RIVER(HabitatAndWildlife.RIVER, TilesAndTokensColour.BLUE),
     MOUNTAIN(HabitatAndWildlife.MOUNTAIN, TilesAndTokensColour.GREY),
     PRAIRIE(HabitatAndWildlife.PRAIRIE, TilesAndTokensColour.YELLOW),
-
+    FORESTKEY(HabitatAndWildlife.FORESTKEY, TilesAndTokensColour.DARKGREEN),
+    WETLANDKEY(HabitatAndWildlife.WETLANDKEY, TilesAndTokensColour.LIGHTGREEN),
+    RIVERKEY(HabitatAndWildlife.RIVERKEY, TilesAndTokensColour.BLUE),
+    MOUNTAINKEY(HabitatAndWildlife.MOUNTAINKEY, TilesAndTokensColour.GREY),
+    PRAIRIEKEY(HabitatAndWildlife.PRAIRIEKEY, TilesAndTokensColour.YELLOW),
     HAWK(HabitatAndWildlife.HAWK, TilesAndTokensColour.BLUE),
     BEAR(HabitatAndWildlife.BEAR, TilesAndTokensColour.BROWN),
     ELK(HabitatAndWildlife.ELK, TilesAndTokensColour.BLACK),
     SALMON(HabitatAndWildlife.SALMON, TilesAndTokensColour.RED),
     FOX(HabitatAndWildlife.FOX, TilesAndTokensColour.ORANGE);
+    
     private HabitatAndWildlife symbol;
     private TilesAndTokensColour colour;
 
