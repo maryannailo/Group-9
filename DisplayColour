@@ -1,20 +1,23 @@
-//This is from the patience code written by Chris Bleakly
+
 public class DisplayColour {
     public static final String RESET = "\033[0m";  // Text Reset
+ public static final String RESET = "\033[0m";  // Text Reset
 
     //TILES
-    public static final String LIGHTGREEN = "\033[0;102m";   // LIGHTGREEN BACKGROUND
-    public static final String DARKGREEN = "\033[0;42m";   // DARKGREEN BACKGROUND
-    public static final String YELLOW = "\033[0;103m";  // YELLOW BACKGROUND
-    public static final String BLUE = "\033[0;44m";    // BLUE BACKGROUND
-    public static final String GREY = "\033[0;47m";     //GREY BACKGROUND
+    public static final String LIGHTGREEN = "\033[38;2;0;255;0m";   // LIGHTGREEN BACKGROUND
+    public static final String DARKGREEN = "\033[32m";   // DARKGREEN BACKGROUND
+    public static final String YELLOW = "\033[38;2;255;255;0m";  // YELLOW BACKGROUND
+    public static final String BLUE = "\033[34m";    // BLUE BACKGROUND
+    public static final String GREY = "\033[37m";     //GREY BACKGROUND
 
     //TOKENS
-    public static final String ORANGE = "\033[91;107m";  // ORANGE
-    public static final String CYAN = "\033[96;107m";    // CYAN
-    public static final String BROWN = "\033[33;107m";   // BROWN
-    public static final String BLACK = "\033[30;107m";   // BLACK
-    public static final String RED = "\033[31;107m";     // RED
-    public static final String PURPLE = "\033[35m";     // KEYSTONE
+    public static final String ORANGE = "\033[38;2;255;127;0m";  // ORANGE
+    public static final String CYAN = "\033[36;1m";    // CYAN
+    public static final String BROWN = "\033[38;2;170;85;0m";   // BROWN
+    public static final String BLACK = "\033[30m";   // BLACK
+    public static final String RED = "\033[38;2;255;0;255m";     // RED
+    public static final String PURPLE = "\033[35m"; //Keystone
+
+
 
 }
