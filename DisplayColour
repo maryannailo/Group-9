@@ -1,7 +1,6 @@
 
 public class DisplayColour {
     public static final String RESET = "\033[0m";  // Text Reset
- public static final String RESET = "\033[0m";  // Text Reset
 
     //TILES
     public static final String LIGHTGREEN = "\033[38;2;0;255;0m";   // LIGHTGREEN BACKGROUND
