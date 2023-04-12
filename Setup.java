@@ -105,17 +105,15 @@ public class Setup
         List<TilesAndTokens> keystone = new ArrayList<>();
         int index = random.nextInt(5);
 
-        if (index == 0) {
-            keystone.add(TilesAndTokens.FORESTKEY);
-        } else if (index == 1) {
-            keystone.add(TilesAndTokens.WETLANDKEY);
-        } else if (index == 2) {
-            keystone.add(TilesAndTokens.RIVERKEY);
-        } else if (index == 3) {
-            keystone.add(TilesAndTokens.MOUNTAINKEY);
-        } else if (index == 4) {
-            keystone.add(TilesAndTokens.PRAIRIEKEY);
+
+        switch (index) {
+            case 0 -> keystone.add(TilesAndTokens.FORESTKEY);
+            case 1 -> keystone.add(TilesAndTokens.WETLANDKEY);
+            case 2 -> keystone.add(TilesAndTokens.RIVERKEY);
+            case 3 -> keystone.add(TilesAndTokens.MOUNTAINKEY);
+            case 4 -> keystone.add(TilesAndTokens.PRAIRIEKEY);
         }
+
 
         // Choose two habitat tiles randomly
         Collections.shuffle(habitatTiles);
