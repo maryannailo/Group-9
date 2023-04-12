@@ -2,14 +2,16 @@ import java.util.*;
 
 public class Setup
 {
-    private List <User> userList = new ArrayList<>();
-    static Random random = new Random();
+    private List <User> userList = new ArrayList<>(); // list to store user objects
+    static Random random = new Random(); // to generate random numbers
 
+    // add a user to the list
     void addUser(User user)
     {
         userList.add(user);
     }
 
+    // return the user based on turn order
     User getUserByTurn(int turn) {
         for (User user : userList) {
             if (user.getTurn() == turn) {
@@ -22,6 +24,7 @@ public class Setup
     // Calculates turn order randomly
     int turnCalculation() {
         List<Integer> turns = new ArrayList<>();
+        // add turn numbers to the list based on the number of User objects
         for (int i = 1; i <= userList.size(); i++) {
             turns.add(i);
         }
@@ -31,8 +34,18 @@ public class Setup
     }
 
     // Define a list of possible habitat tiles
-    public static ArrayList<List<TilesAndTokens>> habitats() {
+    public static ArrayList<List<TilesAndTokens>> allTiles() {
         ArrayList<List<TilesAndTokens>> allTiles = new ArrayList<>();
+        allTiles.addAll(habitats());
+        allTiles.addAll(keystone());
+
+        //shuffle the tiles
+        Collections.shuffle(allTiles);
+
+        return allTiles;
+    }
+
+    public static ArrayList<List<TilesAndTokens>> habitats() {
         ArrayList<TilesAndTokens> habitats = new ArrayList<>();
 
         habitats.add(TilesAndTokens.FOREST);
@@ -42,37 +55,42 @@ public class Setup
         habitats.add(TilesAndTokens.PRAIRIE);
 
         //add all possible habitat tiles
+        ArrayList<List<TilesAndTokens>> possibleTiles = new ArrayList<>();
         for (int i = 0; i < habitats.size(); i++) {
             for (int j = i+1; j < habitats.size(); j++) {
                 List<TilesAndTokens> habitatTiles = new ArrayList<>();
                 habitatTiles.add(habitats.get(i));
                 habitatTiles.add(habitats.get(j));
-                allTiles.add(habitatTiles);
+                possibleTiles.add(habitatTiles);
             }
         }
+        return possibleTiles;
+    }
+
+    private static ArrayList<List<TilesAndTokens>> keystone() {
         //add keystones
-        allTiles.add(Collections.singletonList(TilesAndTokens.FORESTKEY));
-        allTiles.add(Collections.singletonList(TilesAndTokens.WETLANDKEY));
-        allTiles.add(Collections.singletonList(TilesAndTokens.RIVERKEY));
-        allTiles.add(Collections.singletonList(TilesAndTokens.MOUNTAINKEY));
-        allTiles.add(Collections.singletonList(TilesAndTokens.PRAIRIEKEY));
+        ArrayList<List<TilesAndTokens>> keystone = new ArrayList<>();
+        keystone.add(Collections.singletonList(TilesAndTokens.FORESTKEY));
+        keystone.add(Collections.singletonList(TilesAndTokens.WETLANDKEY));
+        keystone.add(Collections.singletonList(TilesAndTokens.RIVERKEY));
+        keystone.add(Collections.singletonList(TilesAndTokens.MOUNTAINKEY));
+        keystone.add(Collections.singletonList(TilesAndTokens.PRAIRIEKEY));
 
-        //shuffle the tiles
-        Collections.shuffle(allTiles);
-
-        return allTiles;
+        return keystone;
     }
 
     // Define a lis of possible wildlife tokens
     private ArrayList<TilesAndTokens> wildlife() {
         ArrayList<TilesAndTokens> wildlifeTokens = new ArrayList<>();
 
+        // add possible wildlife tokens
         wildlifeTokens.add(TilesAndTokens.HAWK);
         wildlifeTokens.add(TilesAndTokens.BEAR);
         wildlifeTokens.add(TilesAndTokens.ELK);
         wildlifeTokens.add(TilesAndTokens.SALMON);
         wildlifeTokens.add(TilesAndTokens.FOX);
 
+        // shuffle tokens
         Collections.shuffle(wildlifeTokens);
 
         return wildlifeTokens;
@@ -101,6 +119,7 @@ public class Setup
 
         // Choose two habitat tiles randomly
         Collections.shuffle(habitatTiles);
+
         List<TilesAndTokens> tiles1 = habitatTiles.get(0);
         List<TilesAndTokens> tiles2 = habitatTiles.get(1);
 
@@ -114,7 +133,7 @@ public class Setup
 
     // Return shuffled habitat tiles
     ArrayList<List<TilesAndTokens>> habitatTiles() {
-        ArrayList<List<TilesAndTokens>> habitats= habitats();
+        ArrayList<List<TilesAndTokens>> habitats = allTiles();
         ArrayList<List<TilesAndTokens>> habitatTiles = new ArrayList<>();
 
         Collections.shuffle(habitats);
