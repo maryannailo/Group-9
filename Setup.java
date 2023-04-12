@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Setup
 {
     private List <User> userList = new ArrayList<>();
+    static Random random = new Random();
 
     void addUser(User user)
     {
@@ -32,15 +31,36 @@ public class Setup
     }
 
     // Define a list of possible habitat tiles
-    private ArrayList<TilesAndTokens> habitats() {
-        ArrayList<TilesAndTokens> habitatTiles = new ArrayList<>();
+    public static ArrayList<List<TilesAndTokens>> habitats() {
+        ArrayList<List<TilesAndTokens>> allTiles = new ArrayList<>();
+        ArrayList<TilesAndTokens> habitats = new ArrayList<>();
 
-        habitatTiles.add(TilesAndTokens.FOREST);
-        habitatTiles.add(TilesAndTokens.WETLAND);
-        habitatTiles.add(TilesAndTokens.RIVER);
-        habitatTiles.add(TilesAndTokens.MOUNTAIN);
-        habitatTiles.add(TilesAndTokens.PRAIRIE);
-        return habitatTiles;
+        habitats.add(TilesAndTokens.FOREST);
+        habitats.add(TilesAndTokens.WETLAND);
+        habitats.add(TilesAndTokens.RIVER);
+        habitats.add(TilesAndTokens.MOUNTAIN);
+        habitats.add(TilesAndTokens.PRAIRIE);
+
+        //add all possible habitat tiles
+        for (int i = 0; i < habitats.size(); i++) {
+            for (int j = i+1; j < habitats.size(); j++) {
+                List<TilesAndTokens> habitatTiles = new ArrayList<>();
+                habitatTiles.add(habitats.get(i));
+                habitatTiles.add(habitats.get(j));
+                allTiles.add(habitatTiles);
+            }
+        }
+        //add keystones
+        allTiles.add(Collections.singletonList(TilesAndTokens.FORESTKEY));
+        allTiles.add(Collections.singletonList(TilesAndTokens.WETLANDKEY));
+        allTiles.add(Collections.singletonList(TilesAndTokens.RIVERKEY));
+        allTiles.add(Collections.singletonList(TilesAndTokens.MOUNTAINKEY));
+        allTiles.add(Collections.singletonList(TilesAndTokens.PRAIRIEKEY));
+
+        //shuffle the tiles
+        Collections.shuffle(allTiles);
+
+        return allTiles;
     }
 
     // Define a lis of possible wildlife tokens
@@ -52,34 +72,65 @@ public class Setup
         wildlifeTokens.add(TilesAndTokens.ELK);
         wildlifeTokens.add(TilesAndTokens.SALMON);
         wildlifeTokens.add(TilesAndTokens.FOX);
+
+        Collections.shuffle(wildlifeTokens);
+
         return wildlifeTokens;
     }
 
     // Return the starter tile for each user
-     ArrayList<TilesAndTokens> setStarterHabitatTile(User user) {
-        ArrayList<TilesAndTokens> habitatTiles = habitats();
-        // shuffle the list and select the first two objects as the user's starter tile
+    ArrayList<List<TilesAndTokens>> setStarterHabitatTile(User user) {
+        ArrayList<List<TilesAndTokens>> starterHabitatTiles = new ArrayList<>();
+        ArrayList<List<TilesAndTokens>> habitatTiles = habitats();
+
+        // Choose one keystone randomly
+        List<TilesAndTokens> keystone = new ArrayList<>();
+        int index = random.nextInt(5);
+
+        if (index == 0) {
+            keystone.add(TilesAndTokens.FORESTKEY);
+        } else if (index == 1) {
+            keystone.add(TilesAndTokens.WETLANDKEY);
+        } else if (index == 2) {
+            keystone.add(TilesAndTokens.RIVERKEY);
+        } else if (index == 3) {
+            keystone.add(TilesAndTokens.MOUNTAINKEY);
+        } else if (index == 4) {
+            keystone.add(TilesAndTokens.PRAIRIEKEY);
+        }
+
+        // Choose two habitat tiles randomly
         Collections.shuffle(habitatTiles);
-        ArrayList<TilesAndTokens> starterTiles = new ArrayList<>();
-        starterTiles.add(habitatTiles.get(0));
-        starterTiles.add(habitatTiles.get(1));
-        return starterTiles;
+        List<TilesAndTokens> tiles1 = habitatTiles.get(0);
+        List<TilesAndTokens> tiles2 = habitatTiles.get(1);
+
+        starterHabitatTiles.add(keystone);
+        starterHabitatTiles.add(tiles1);
+        starterHabitatTiles.add(tiles2);
+
+        return starterHabitatTiles;
     }
 
+
     // Return shuffled habitat tiles
-     ArrayList<TilesAndTokens> habitatTiles() {
-         ArrayList<TilesAndTokens> habitatTiles = habitats();
-         for (int i = 0; i < habitatTiles.size(); i++) {
-             Collections.shuffle(habitatTiles);
+    ArrayList<List<TilesAndTokens>> habitatTiles() {
+        ArrayList<List<TilesAndTokens>> habitats= habitats();
+        ArrayList<List<TilesAndTokens>> habitatTiles = new ArrayList<>();
+
+        Collections.shuffle(habitats);
+        for (int i = 0; i < 4; i++) {
+            habitatTiles.add(habitats.get(i));
         }
         return habitatTiles;
     }
 
     // Return shuffled wildlife tokens
     ArrayList<TilesAndTokens> wildlifeTokens() {
-        ArrayList<TilesAndTokens> wildlifeTokens = wildlife();
-        for (int i = 0; i < wildlifeTokens.size(); i++) {
-            Collections.shuffle(wildlifeTokens);
+        ArrayList<TilesAndTokens> wildlifeTokens = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            Collections.shuffle(wildlife());
+            wildlifeTokens.add(wildlife().get(i));
         }
         return wildlifeTokens;
     }
