@@ -27,7 +27,7 @@ public class Display {
 
     public void displayQuit () {
         System.out.println("Thank you for playing Cascadia!");
-        System.out.println("Quit.");
+        System.out.println("Quitting...");
     }
 
 }
