@@ -2,8 +2,12 @@ import java.util.*;
 
 public class Setup
 {
-    private List <User> userList = new ArrayList<>(); // list to store user objects
+    Display display = new Display();
+    Scanner scan = new Scanner(System.in);
     static Random random = new Random(); // to generate random numbers
+    private List<User> userList = new ArrayList<>(); // list to store user objects
+    private TilesAndTokens placedToken;
+
 
     // add a user to the list
     void addUser(User user)
@@ -152,7 +156,32 @@ public class Setup
         return wildlifeTokens;
     }
 
+    public int takeTurn(Scanner scan, int turnCounter) {
+        User currentUser = getUserByTurn(turnCounter);
+        System.out.println("");
+        System.out.println("It is " + currentUser.getName() + "'s turn.");
+        display.displayMenu();
+        int choice = scan.nextInt();
+        return choice;
+    }
 
+    // Function that gets the selected tile and token from the user
+    public void getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<TilesAndTokens> wildlifeTokens) {
+        while (true) {
+            System.out.println("Please select a habitat tile (1,2,3,4 respectively):");
+            int selectedTile = scan.nextInt();
+            System.out.println("Please select a wildlife token (1,2,3,4 respectively):");
+            int selectedToken = scan.nextInt();
+            if (selectedTile > 4 || selectedTile < 1 || selectedToken > 4 || selectedToken < 1) {
+                System.out.println("Invalid input. Try again.");
+            } else {
+                List<TilesAndTokens> habitat = habitatTiles.get(selectedTile - 1);
+                List<TilesAndTokens> wildlife = Collections.singletonList(wildlifeTokens.get(selectedToken - 1));
+                System.out.println(habitat + " " + wildlife);
+                break;
+            }
+        }
+    }
 
     private void showUserTiles(String name)
     {
