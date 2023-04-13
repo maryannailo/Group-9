@@ -19,7 +19,7 @@ public class Main
         List<ArrayList<List<TilesAndTokens>>> allStarterTiles = new ArrayList<>();
 
         while (numPlayers < 2 || numPlayers > 4) {
-            //Add Error handling incase number inputed is not between 2 and 4
+            //Add Error handling in case input is not between 2 and 4
             System.out.println("Please enter the Number of Players playing 2-4:");
             try {
                 numPlayers = scan.nextInt();
@@ -31,7 +31,6 @@ public class Main
                 System.out.println("Invalid input.");
             }
         }
-
 
         for(int x = 1; x<=numPlayers; x++)
         {
@@ -46,39 +45,50 @@ public class Main
 
         turnCounter = setup.turnCalculation();
 
-
         while(choice!=3)
         {
+            // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
-            System.out.println("");
-            System.out.println("It is " + currentUser.getName() + "'s turn.");
-            display.displayMenu();
-            choice = scan.nextInt();
-
-
+            choice = setup.takeTurn(scan , turnCounter);
+            
             //Print out the name of the current persons turn and what turn it is
             switch(choice)
             {
                 case 1: //Play turn
                     List<List<TilesAndTokens>> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
+                    ArrayList<List<TilesAndTokens>> habitatTiles = setup.habitatTiles();
+                    ArrayList<TilesAndTokens> wildlifeTokens = setup.wildlifeTokens();
+
                     System.out.println("Your starter tile is: " + currentStarterTiles);
-                    System.out.println("Your habitat tiles are: " + setup.habitatTiles());
-                    System.out.println("Your wildlife tokens are: " + setup.wildlifeTokens());
+                    System.out.println("Your habitat tiles are: " + habitatTiles);
+                    System.out.println("Your wildlife tokens are: " + wildlifeTokens);
+
+                    setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
+
+                    // Allow the user not to place token
+                    boolean validInput = false;
+                    while (!validInput) {
+                        System.out.println("Do you want to place a token? (y/n)");
+                        String tokenChoice = scan.next();
+                        if (tokenChoice.equalsIgnoreCase("n")) {
+                            // Do not place token
+                            break;
+                        } else if (tokenChoice.equalsIgnoreCase("y")) {
+                            validInput = true;
+                            // Continue with token placement code
+                        } else {
+                            System.out.println("Invalid input. Try again.");
+                        }
+                    }
 
                 case 2: //Skip turn
                     turnCounter = (turnCounter % numPlayers) + 1;
                     break;
 
-                case 3: // Exit
-                    display.displayQuit();
-                    break;
                 default:
                     display.displayCommandNotPossible();
                     break;
             }
-
         }
-
     }
-
 }
