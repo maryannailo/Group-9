@@ -1,6 +1,11 @@
+//This class represents the game board in which Habitat Tiles and Tokens will be displayed
+//
+
 import java.util.Arrays;
 
 public class Board {
+
+//this method shows a grid of the board, making it easier for the play to place their tiles and tokens in the specific place
 
     public static void printBoard(String[][][] board) {
         int numRows = board.length;
@@ -26,6 +31,8 @@ public class Board {
             System.out.println();
         }
     }
+    
+    //this will place the tile onto the board. Each tile is located in the HabitatTiles class
     public static void placeTile(String[][][] board, String[][] tile, int row, int col) {
         for (int i = 0; i < tile.length; i++) {
             for (int j = 0; j < tile[i].length; j++) {
@@ -37,6 +44,7 @@ public class Board {
             }
         }
     }
+    
     //this will replace the potential token in the string and make it the actual token
     //chosen by the player
     public static String replace (String[][] arr, String oldSubstr, String newSubstr){
@@ -51,7 +59,7 @@ public class Board {
     }
 
 
-
+//this method replaces the letter representation of the token with an emoticon/emoji, this will make it easier for the player to distinguish what token has been placed onto the tile. 
     public static void placeToken(String[][][] board,String [][] tileChosen ,int row, int col, String oldStr) {
         String[][] tile = new String[][]{board[row][col]};
         String newStr = new String();
