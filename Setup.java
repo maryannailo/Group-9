@@ -166,7 +166,8 @@ public class Setup
     }
 
     // Function that gets the selected tile and token from the user
-    public void getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<TilesAndTokens> wildlifeTokens) {
+    public List<List<TilesAndTokens>> getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<TilesAndTokens> wildlifeTokens) {
+        List<List<TilesAndTokens>> selectedTileAndToken = new ArrayList<>();
         while (true) {
             System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
             int input = scan.nextInt();
@@ -175,10 +176,12 @@ public class Setup
             } else {
                 List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
                 List<TilesAndTokens> wildlife = Collections.singletonList(wildlifeTokens.get(input - 1));
-                System.out.println(habitat + " " + wildlife);
+                selectedTileAndToken.add(habitat);
+                selectedTileAndToken.add(wildlife);
                 break;
             }
         }
+        return selectedTileAndToken;
     }
 
     private void showUserTiles(String name)
