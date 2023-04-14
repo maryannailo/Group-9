@@ -17,6 +17,8 @@ public class Main
         int turnCounter;
         int numPlayers = 0;
         List<ArrayList<List<TilesAndTokens>>> allStarterTiles = new ArrayList<>();
+        List<ArrayList<List<TilesAndTokens>>> allHabitatTiles = new ArrayList<>();
+        List<ArrayList<List<TilesAndTokens>>> allWildlifeTokens = new ArrayList<>();
 
         while (numPlayers < 2 || numPlayers > 4) {
             //Add Error handling in case input is not between 2 and 4
@@ -40,74 +42,70 @@ public class Main
             setup.addUser(user);
             //Add users
             ArrayList<List<TilesAndTokens>> userStarterTile = setup.setStarterHabitatTile(user);
+            ArrayList<List<TilesAndTokens>> userHabitatTiles = setup.habitatTiles();
+            ArrayList<List<TilesAndTokens>> userWildlifeTokens = setup.wildlifeTokens();
             allStarterTiles.add(userStarterTile);
+            allHabitatTiles.add(userHabitatTiles);
+            allWildlifeTokens.add(userWildlifeTokens);
         }
 
         turnCounter = setup.turnCalculation();
 
-        while(choice!=67)
+        while(choice!=2)
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
             choice = setup.takeTurn(scan, turnCounter);
 
             //Print out the name of the current persons turn and what turn it is
-            switch(choice)
-            {
+            switch(choice) {
                 case 1: //Play turn
                     List<List<TilesAndTokens>> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
-                    ArrayList<List<TilesAndTokens>> habitatTiles = setup.habitatTiles();
-                    ArrayList<List<TilesAndTokens>> wildlifeTokens = setup.wildlifeTokens();
+                    ArrayList<List<TilesAndTokens>> currentHabitatTiles = allHabitatTiles.get(currentUser.getTurn() - 1);
+                    ArrayList<List<TilesAndTokens>> currentWildlifeTokens = allWildlifeTokens.get(currentUser.getTurn() - 1);
 
                     System.out.println("Your starter tile is: " + currentStarterTiles);
-                    System.out.println("Your habitat tiles are: " + habitatTiles);
-                    System.out.println("Your wildlife tokens are: " + wildlifeTokens);
+                    System.out.println("Your habitat tiles are: " + currentHabitatTiles);
+                    System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
 
-                    if(setup.automaticCull(wildlifeTokens))
-                    {
-                        wildlifeTokens = setup.wildlifeTokens();
-                        System.out.println("Your wildlife tokens are: " + wildlifeTokens);
-                    }
+                    ArrayList<List<TilesAndTokens>> replacedTokens1;
+                    ArrayList<List<TilesAndTokens>> replacedTokens2;
 
-                    if(setup.optionalCull(wildlifeTokens))
-                    {
+                    if (setup.automaticCull(currentWildlifeTokens)) {
+                        replacedTokens1 = setup.wildlifeTokens();
+                        currentWildlifeTokens = replacedTokens1;
+                        System.out.println("Your habitat tiles are: " + currentHabitatTiles);
+                        System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
+                        List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens1);
+                        setup.replacePairs(currentHabitatTiles, replacedTokens1, selectedTileAndToken);
+                    } else if (setup.optionalCull(currentWildlifeTokens)) {
                         System.out.println("You have the option to execute a cull (y/n)");
                         String in = scan.next();
-                        if (in.equalsIgnoreCase("y"))
-                        {
-                            wildlifeTokens = setup.wildlifeTokens();
-                            System.out.println("Your wildlife tokens are: " + wildlifeTokens);
+                        if (in.equalsIgnoreCase("y")) {
+                            replacedTokens2 = setup.wildlifeTokens();
+                            currentWildlifeTokens = replacedTokens2;
+                            System.out.println("Your habitat tiles are: " + currentHabitatTiles);
+                            System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
+                            List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens2);
+                            setup.replacePairs(currentHabitatTiles, replacedTokens2, selectedTileAndToken);
+
+                        } else if (in.equalsIgnoreCase("n")) {
                             break;
-                        }
-                        else if (in.equalsIgnoreCase("n"))
-                        {
-                            break;
-                        }
-                        else
-                        {
+                        } else {
                             System.out.println("Invalid input. Try again.");
                         }
-                    }
-
-                    List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
-                    
-                    
+                    } else {
+                        List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, currentWildlifeTokens);
+                        
                     /*
                     if(!setup.isMatch(selectedTileAndToken))
                     {
                         System.out.println("The following token cannot be placed.");
-
                     }
-
                      */
-
-
-
-
-
-                    setup.replacePairs(habitatTiles, wildlifeTokens, selectedTileAndToken);
-
-
+                        
+                        setup.replacePairs(currentHabitatTiles, currentWildlifeTokens, selectedTileAndToken);
+                    }
 
                     // Allow the user not to place token
                     boolean validInput = false;
@@ -125,9 +123,9 @@ public class Main
                         }
                     }
 
-                    if (setup.isGameEnd()){
+                    if (setup.isGameEnd()) {
                         System.out.println("Game is over!");
-                        // end game
+                        choice = 2;
                     }
 
                 case 2: //Skip turn
