@@ -90,12 +90,18 @@ public class Main
                     }
 
                     List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
-
+                    
+                    
+                    /*
                     if(!setup.isMatch(selectedTileAndToken))
                     {
                         System.out.println("The following token cannot be placed.");
 
                     }
+
+                     */
+
+
 
 
 
