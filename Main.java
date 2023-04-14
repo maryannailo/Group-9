@@ -49,21 +49,22 @@ public class Main
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
-            choice = setup.takeTurn(scan , turnCounter);
-            
+            choice = setup.takeTurn(scan, turnCounter);
+
             //Print out the name of the current persons turn and what turn it is
             switch(choice)
             {
                 case 1: //Play turn
                     List<List<TilesAndTokens>> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> habitatTiles = setup.habitatTiles();
-                    ArrayList<TilesAndTokens> wildlifeTokens = setup.wildlifeTokens();
+                    ArrayList<List<TilesAndTokens>> wildlifeTokens = setup.wildlifeTokens();
 
                     System.out.println("Your starter tile is: " + currentStarterTiles);
                     System.out.println("Your habitat tiles are: " + habitatTiles);
                     System.out.println("Your wildlife tokens are: " + wildlifeTokens);
 
-                    setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
+                    List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
+                    setup.replacePairs(habitatTiles, wildlifeTokens, selectedTileAndToken);
 
                     // Allow the user not to place token
                     boolean validInput = false;
