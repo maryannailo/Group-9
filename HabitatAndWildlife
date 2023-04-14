@@ -4,20 +4,30 @@ public enum HabitatAndWildlife {
     RIVER("R"),
     MOUNTAIN("M"),
     PRAIRIE("P"),
+
+    KEY("\uD83D\uDDDD️"),
+
     FORESTKEY("FT\uD83D\uDDDD️"),
     WETLANDKEY("W\uD83D\uDDDD️"),
     RIVERKEY("R\uD83D\uDDDD️"),
     MOUNTAINKEY("M\uD83D\uDDDD️"),
     PRAIRIEKEY("P\uD83D\uDDDD️"),
 
+
     HAWK("H"),
     BEAR("B"),
     ELK("E"),
     SALMON("S"),
     FOX("F"),
-    KEY("K"),
-    NATURE("\uD83C\uDF33");
 
+    NATURE("\uD83C\uDF33"),
+    HAWKTOKEN("\uD83E\uDD85"),
+    BEARTOKEN("\uD83D\uDC3B"),
+    ELKTOKEN("\uD83E\uDD8C"),
+    SALMONTOKEN("\uD83D\uDC1F"),
+    FOXTOKEN("\uD83E\uDD8A");
+
+    
     private String symbol;
 
     HabitatAndWildlife (String symbol) {
