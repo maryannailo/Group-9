@@ -9,22 +9,24 @@ public enum TilesAndTokens {
     RIVERKEY(HabitatAndWildlife.RIVERKEY, TilesAndTokensColour.BLUE),
     MOUNTAINKEY(HabitatAndWildlife.MOUNTAINKEY, TilesAndTokensColour.GREY),
     PRAIRIEKEY(HabitatAndWildlife.PRAIRIEKEY, TilesAndTokensColour.YELLOW),
+    KEY(HabitatAndWildlife.KEY, TilesAndTokensColour.PURPLE),
     HAWK(HabitatAndWildlife.HAWK, TilesAndTokensColour.BLUE),
+    HAWKTOKEN(HabitatAndWildlife.HAWKTOKEN, TilesAndTokensColour.BLACK),
     BEAR(HabitatAndWildlife.BEAR, TilesAndTokensColour.BROWN),
+    BEARTOKEN(HabitatAndWildlife.BEARTOKEN, TilesAndTokensColour.BLACK),
     ELK(HabitatAndWildlife.ELK, TilesAndTokensColour.BLACK),
+    ELKTOKEN(HabitatAndWildlife.ELKTOKEN, TilesAndTokensColour.BLACK),
     SALMON(HabitatAndWildlife.SALMON, TilesAndTokensColour.RED),
+    SALMONTOKEN(HabitatAndWildlife.SALMONTOKEN, TilesAndTokensColour.BLACK),
     FOX(HabitatAndWildlife.FOX, TilesAndTokensColour.ORANGE),
-    KEY(HabitatAndWildlife.KEY , TilesAndTokensColour.PURPLE),
-    NATURE(HabitatAndWildlife.NATURE, TilesAndTokensColour.DARKGREEN);
-   // private int natureToken = 0;
-
+    FOXTOKEN(HabitatAndWildlife.FOXTOKEN, TilesAndTokensColour.BLACK);
     private HabitatAndWildlife symbol;
     private TilesAndTokensColour colour;
-
     TilesAndTokens (HabitatAndWildlife symbol, TilesAndTokensColour colour) {
         this.symbol = symbol;
         this.colour = colour;
     }
+
 
     public TilesAndTokensColour getColour () {
         return colour;
@@ -34,6 +36,4 @@ public enum TilesAndTokens {
     public HabitatAndWildlife getSymbol() {
         return symbol;
     }
-
-
 }
