@@ -37,6 +37,54 @@ public class Board {
             }
         }
     }
- 
-    
+    //this will replace the potential token in the string and make it the actual token
+    //chosen by the player
+    public static String replace (String[][] arr, String oldSubstr, String newSubstr){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (arr[i][j].contains(oldSubstr)) {
+                    arr[i][j] = arr[i][j].replace(oldSubstr, newSubstr);
+                }
+            }
+        }
+        return Arrays.toString(arr);
+    }
+
+
+
+    public static void placeToken(String[][][] board,String [][] tileChosen ,int row, int col, String oldStr) {
+        String[][] tile = new String[][]{board[row][col]};
+        String newStr = new String();
+        for (int i = 0; i < tile.length; i++) {
+            for (int j = 0; j < tile[i].length; j++) {
+                switch (oldStr){
+                    case "E" -> {
+                        newStr = String.valueOf(TilesAndTokens.ELKTOKEN.getSymbol());
+                        replace(tileChosen,oldStr,newStr);
+                        break;
+                    }
+                    case "F" -> {
+                        newStr = String.valueOf(TilesAndTokens.FOXTOKEN.getSymbol());
+                        replace(tileChosen,oldStr,newStr);
+                        break;
+                    }
+                    case "H" -> {
+                        newStr = String.valueOf(TilesAndTokens.HAWKTOKEN.getSymbol());
+                        replace(tileChosen,oldStr,newStr);
+                        break;
+                    }
+                    case "S" -> {
+                        newStr = String.valueOf(TilesAndTokens.SALMONTOKEN.getSymbol());
+                        replace(tileChosen,oldStr,newStr);
+                        break;
+                    }
+                    case "B" -> {
+                        newStr = String.valueOf(TilesAndTokens.BEARTOKEN.getSymbol());
+                        replace(tileChosen,oldStr,newStr);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
