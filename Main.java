@@ -108,6 +108,11 @@ public class Main
                         }
                     }
 
+                    if (setup.isGameEnd()){
+                        System.out.println("Game is over!");
+                        // end game
+                    }
+
                 case 2: //Skip turn
                     turnCounter = (turnCounter % numPlayers) + 1;
                     break;
