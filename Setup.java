@@ -224,9 +224,12 @@ public class Setup
             System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
             int input = scan.nextInt();
             // error handling if there's incorrect input
-            if (input > 4 || input < 1) {
+            if (input > 4 || input < 1)
+            {
                 System.out.println("Invalid input. Try again.");
-            } else {
+            }
+            else
+            {
                 // get the value of the habitat tile and wildlife token using the input as the index
                 List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
                 List<TilesAndTokens> wildlife = wildlifeTokens.get(input - 1);
@@ -237,6 +240,26 @@ public class Setup
             }
         }
         return selectedTileAndToken;
+    }
+
+    public boolean isMatch(List<List<TilesAndTokens>> selectedTileAndToken)
+    {
+        String habitatSymbol = String.valueOf(selectedTileAndToken.get(0).get(0));
+        String wildlifeSymbol = String.valueOf(selectedTileAndToken.get(1).get(1));
+
+        if (habitatSymbol.equals(HabitatAndWildlife.FOREST.toString())) {
+            return wildlifeSymbol.equals(HabitatAndWildlife.FOX.toString());
+        } else if (habitatSymbol.equals(HabitatAndWildlife.WETLAND.toString())) {
+            return wildlifeSymbol.equals(HabitatAndWildlife.SALMON.toString());
+        } else if (habitatSymbol.equals(HabitatAndWildlife.RIVER.toString())) {
+            return wildlifeSymbol.equals(HabitatAndWildlife.BEAR.toString());
+        } else if (habitatSymbol.equals(HabitatAndWildlife.MOUNTAIN.toString())) {
+            return wildlifeSymbol.equals(HabitatAndWildlife.HAWK.toString());
+        } else if (habitatSymbol.equals(HabitatAndWildlife.PRAIRIE.toString())) {
+            return wildlifeSymbol.equals(HabitatAndWildlife.ELK.toString());
+        }
+
+        return false;
     }
 
     // Function to replace selected tile and token
