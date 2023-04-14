@@ -14,7 +14,9 @@ public enum HabitatAndWildlife {
     BEAR("B"),
     ELK("E"),
     SALMON("S"),
-    FOX("FX");
+    FOX("F"),
+    KEY("K"),
+    NATURE("\uD83C\uDF33");
 
     private String symbol;
 
