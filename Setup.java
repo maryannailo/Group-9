@@ -146,12 +146,12 @@ public class Setup
     }
 
     // Return shuffled wildlife tokens
-    ArrayList<TilesAndTokens> wildlifeTokens() {
-        ArrayList<TilesAndTokens> wildlifeTokens = new ArrayList<>();
+    ArrayList<List<TilesAndTokens>> wildlifeTokens() {
+        ArrayList<List<TilesAndTokens>> wildlifeTokens = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             Collections.shuffle(wildlife());
-            wildlifeTokens.add(wildlife().get(i));
+            wildlifeTokens.add(Collections.singletonList(wildlife().get(i)));
         }
         return wildlifeTokens;
     }
@@ -166,7 +166,7 @@ public class Setup
     }
 
     // Function that gets the selected tile and token from the user
-    public List<List<TilesAndTokens>> getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<TilesAndTokens> wildlifeTokens) {
+    public List<List<TilesAndTokens>> getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens) {
         List<List<TilesAndTokens>> selectedTileAndToken = new ArrayList<>();
         while (true) {
             System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
@@ -175,13 +175,30 @@ public class Setup
                 System.out.println("Invalid input. Try again.");
             } else {
                 List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
-                List<TilesAndTokens> wildlife = Collections.singletonList(wildlifeTokens.get(input - 1));
+                List<TilesAndTokens> wildlife = wildlifeTokens.get(input - 1);
                 selectedTileAndToken.add(habitat);
                 selectedTileAndToken.add(wildlife);
+                System.out.println(selectedTileAndToken);
                 break;
             }
         }
         return selectedTileAndToken;
+    }
+
+    public void replacePairs(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens, List<List<TilesAndTokens>> selectedTileAndToken) {
+        for (int i = 0; i < habitatTiles.size(); i++) {
+            if (selectedTileAndToken.get(0) == habitatTiles.get(i)) {
+                habitatTiles.set(i, habitatTiles().get(0));
+                System.out.println("Your new habitat tiles are: " + habitatTiles);
+            }
+        }
+
+        for (int j = 0; j < wildlifeTokens.size(); j++) {
+            if (selectedTileAndToken.get(1) == wildlifeTokens.get(j)) {
+                wildlifeTokens.set(j, wildlifeTokens().get(0));
+                System.out.println("Your new wildlife tokens are: " + wildlifeTokens);
+            }
+        }
     }
 
     private void showUserTiles(String name)
