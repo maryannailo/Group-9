@@ -61,12 +61,15 @@ public class Setup
 
         //add all possible habitat tiles
         ArrayList<List<TilesAndTokens>> possibleTiles = new ArrayList<>();
-        for (int i = 0; i < habitats.size(); i++) {
-            for (int j = i+1; j < habitats.size(); j++) {
-                List<TilesAndTokens> habitatTiles = new ArrayList<>();
-                habitatTiles.add(habitats.get(i));
-                habitatTiles.add(habitats.get(j));
-                possibleTiles.add(habitatTiles);
+        // 60 normal habitat tiles (6 * 10 possible tiles)
+        for (int x = 0; x < 6; x++) {
+            for (int i = 0; i < habitats.size(); i++) {
+                for (int j = i+1; j < habitats.size(); j++) {
+                    List<TilesAndTokens> habitatTiles = new ArrayList<>();
+                    habitatTiles.add(habitats.get(i));
+                    habitatTiles.add(habitats.get(j));
+                    possibleTiles.add(habitatTiles);
+                }
             }
         }
         return possibleTiles;
@@ -76,12 +79,14 @@ public class Setup
     private static ArrayList<List<TilesAndTokens>> keystone() {
         //add keystones
         ArrayList<List<TilesAndTokens>> keystone = new ArrayList<>();
-        keystone.add(Collections.singletonList(TilesAndTokens.FORESTKEY));
-        keystone.add(Collections.singletonList(TilesAndTokens.WETLANDKEY));
-        keystone.add(Collections.singletonList(TilesAndTokens.RIVERKEY));
-        keystone.add(Collections.singletonList(TilesAndTokens.MOUNTAINKEY));
-        keystone.add(Collections.singletonList(TilesAndTokens.PRAIRIEKEY));
-
+        // 25 keystones (5 * 5)
+        for (int i = 0; i < 5; i++) {
+            keystone.add(Collections.singletonList(TilesAndTokens.FORESTKEY));
+            keystone.add(Collections.singletonList(TilesAndTokens.WETLANDKEY));
+            keystone.add(Collections.singletonList(TilesAndTokens.RIVERKEY));
+            keystone.add(Collections.singletonList(TilesAndTokens.MOUNTAINKEY));
+            keystone.add(Collections.singletonList(TilesAndTokens.PRAIRIEKEY));
+        }
         return keystone;
     }
 
@@ -89,17 +94,27 @@ public class Setup
     private ArrayList<TilesAndTokens> wildlife() {
         ArrayList<TilesAndTokens> wildlifeTokens = new ArrayList<>();
 
-        // add possible wildlife tokens
-        wildlifeTokens.add(TilesAndTokens.HAWK);
-        wildlifeTokens.add(TilesAndTokens.BEAR);
-        wildlifeTokens.add(TilesAndTokens.ELK);
-        wildlifeTokens.add(TilesAndTokens.SALMON);
-        wildlifeTokens.add(TilesAndTokens.FOX);
+        // add 100 possible wildlife tokens (20 * 5)
+        for (int i = 0; i < 20; i++) {
+            wildlifeTokens.add(TilesAndTokens.HAWK);
+            wildlifeTokens.add(TilesAndTokens.BEAR);
+            wildlifeTokens.add(TilesAndTokens.ELK);
+            wildlifeTokens.add(TilesAndTokens.SALMON);
+            wildlifeTokens.add(TilesAndTokens.FOX);
+        }
 
         // shuffle tokens
         Collections.shuffle(wildlifeTokens);
 
         return wildlifeTokens;
+    }
+
+    private ArrayList<TilesAndTokens> natureTokens() {
+        ArrayList<TilesAndTokens> natureTokens = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            natureTokens.add(TilesAndTokens.NATURE);
+        }
+        return natureTokens;
     }
 
     // Return the starter tile for each user
@@ -243,6 +258,11 @@ public class Setup
         }
     }
 
+    // function that detects if no more tiles are available
+    public boolean isGameEnd() {
+        return allTiles().size() == 0;
+    }
+
     private void showUserTiles(String name)
     {
         for(User user: userList)
@@ -253,6 +273,4 @@ public class Setup
             }
         }
     }
-
-
 }
