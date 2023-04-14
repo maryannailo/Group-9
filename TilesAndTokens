@@ -13,8 +13,11 @@ public enum TilesAndTokens {
     BEAR(HabitatAndWildlife.BEAR, TilesAndTokensColour.BROWN),
     ELK(HabitatAndWildlife.ELK, TilesAndTokensColour.BLACK),
     SALMON(HabitatAndWildlife.SALMON, TilesAndTokensColour.RED),
-    FOX(HabitatAndWildlife.FOX, TilesAndTokensColour.ORANGE);
-    
+    FOX(HabitatAndWildlife.FOX, TilesAndTokensColour.ORANGE),
+    KEY(HabitatAndWildlife.KEY , TilesAndTokensColour.PURPLE),
+    NATURE(HabitatAndWildlife.NATURE, TilesAndTokensColour.DARKGREEN);
+   // private int natureToken = 0;
+
     private HabitatAndWildlife symbol;
     private TilesAndTokensColour colour;
 
@@ -27,5 +30,10 @@ public enum TilesAndTokens {
         return colour;
     }
     public String toString(){return String.valueOf(symbol);}
+
+    public HabitatAndWildlife getSymbol() {
+        return symbol;
+    }
+
 
 }
