@@ -45,7 +45,7 @@ public class Main
 
         turnCounter = setup.turnCalculation();
 
-        while(choice!=2)
+        while(choice!=67)
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
@@ -90,7 +90,18 @@ public class Main
                     }
 
                     List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
+
+                    if(!setup.isMatch(selectedTileAndToken))
+                    {
+                        System.out.println("The following token cannot be placed.");
+
+                    }
+
+
+
                     setup.replacePairs(habitatTiles, wildlifeTokens, selectedTileAndToken);
+
+
 
                     // Allow the user not to place token
                     boolean validInput = false;
