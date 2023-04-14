@@ -37,7 +37,7 @@ public class Setup
         return turns.get(0);
     }
 
-    // Define a list of possible habitat tiles
+    // Define a list of possible habitat tiles including keystones
     public static ArrayList<List<TilesAndTokens>> allTiles() {
         ArrayList<List<TilesAndTokens>> allTiles = new ArrayList<>();
         allTiles.addAll(habitats());
@@ -49,6 +49,7 @@ public class Setup
         return allTiles;
     }
 
+    // Arraylist possible habitat tiles
     public static ArrayList<List<TilesAndTokens>> habitats() {
         ArrayList<TilesAndTokens> habitats = new ArrayList<>();
 
@@ -71,6 +72,7 @@ public class Setup
         return possibleTiles;
     }
 
+    // Arraylist of possible keystones
     private static ArrayList<List<TilesAndTokens>> keystone() {
         //add keystones
         ArrayList<List<TilesAndTokens>> keystone = new ArrayList<>();
@@ -83,7 +85,7 @@ public class Setup
         return keystone;
     }
 
-    // Define a lis of possible wildlife tokens
+    // Define a list of possible wildlife tokens
     private ArrayList<TilesAndTokens> wildlife() {
         ArrayList<TilesAndTokens> wildlifeTokens = new ArrayList<>();
 
@@ -109,7 +111,6 @@ public class Setup
         List<TilesAndTokens> keystone = new ArrayList<>();
         int index = random.nextInt(5);
 
-
         switch (index) {
             case 0 -> keystone.add(TilesAndTokens.FORESTKEY);
             case 1 -> keystone.add(TilesAndTokens.WETLANDKEY);
@@ -117,7 +118,6 @@ public class Setup
             case 3 -> keystone.add(TilesAndTokens.MOUNTAINKEY);
             case 4 -> keystone.add(TilesAndTokens.PRAIRIEKEY);
         }
-
 
         // Choose two habitat tiles randomly
         Collections.shuffle(habitatTiles);
@@ -131,7 +131,6 @@ public class Setup
 
         return starterHabitatTiles;
     }
-
 
     // Return shuffled habitat tiles
     ArrayList<List<TilesAndTokens>> habitatTiles() {
@@ -156,13 +155,12 @@ public class Setup
         return wildlifeTokens;
     }
 
+    // Function that allows to the users to take turns
     public int takeTurn(Scanner scan, int turnCounter) {
         User currentUser = getUserByTurn(turnCounter);
-        System.out.println("");
         System.out.println("It is " + currentUser.getName() + "'s turn.");
         display.displayMenu();
-        int choice = scan.nextInt();
-        return choice;
+        return scan.nextInt();
     }
 
     // Function that gets the selected tile and token from the user
@@ -171,22 +169,26 @@ public class Setup
         while (true) {
             System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
             int input = scan.nextInt();
+            // error handling if there's incorrect input
             if (input > 4 || input < 1) {
                 System.out.println("Invalid input. Try again.");
             } else {
+                // get the value of the habitat tile and wildlife token using the input as the index
                 List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
                 List<TilesAndTokens> wildlife = wildlifeTokens.get(input - 1);
+                // add the elements to the list of selected tile and token pair
                 selectedTileAndToken.add(habitat);
                 selectedTileAndToken.add(wildlife);
-                System.out.println(selectedTileAndToken);
                 break;
             }
         }
         return selectedTileAndToken;
     }
 
+    // Function to replace selected tile and token
     public void replacePairs(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens, List<List<TilesAndTokens>> selectedTileAndToken) {
         for (int i = 0; i < habitatTiles.size(); i++) {
+            // if the first element of the list (which is a tile) is equal to the element at index i, replace the element with a new habitat tile
             if (selectedTileAndToken.get(0) == habitatTiles.get(i)) {
                 habitatTiles.set(i, habitatTiles().get(0));
                 System.out.println("Your new habitat tiles are: " + habitatTiles);
@@ -194,6 +196,7 @@ public class Setup
         }
 
         for (int j = 0; j < wildlifeTokens.size(); j++) {
+            // if the second element of the list (which is a token) is equal to the element at index j, replace the element with a new wildlife token
             if (selectedTileAndToken.get(1) == wildlifeTokens.get(j)) {
                 wildlifeTokens.set(j, wildlifeTokens().get(0));
                 System.out.println("Your new wildlife tokens are: " + wildlifeTokens);
