@@ -45,7 +45,7 @@ public class Main
 
         turnCounter = setup.turnCalculation();
 
-        while(choice!=3)
+        while(choice!=2)
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
