@@ -9,6 +9,7 @@ public class Display {
         System.out.println("This is done by placing habitat tokens between pillars on your player board and selecting a corresponding wildlife tile to place on top of it.");
         System.out.println("Points are scored based on the type and placement of habitats and wildlife, as well as any objectives you achieve.");
         System.out.println("The player with the most points at the end of the game wins!");
+        System.out.println("");
     }
 
     public void displayMenu() {
