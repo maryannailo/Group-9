@@ -63,6 +63,32 @@ public class Main
                     System.out.println("Your habitat tiles are: " + habitatTiles);
                     System.out.println("Your wildlife tokens are: " + wildlifeTokens);
 
+                    if(setup.automaticCull(wildlifeTokens))
+                    {
+                        wildlifeTokens = setup.wildlifeTokens();
+                        System.out.println("Your wildlife tokens are: " + wildlifeTokens);
+                    }
+
+                    if(setup.optionalCull(wildlifeTokens))
+                    {
+                        System.out.println("You have the option to execute a cull (y/n)");
+                        String in = scan.next();
+                        if (in.equalsIgnoreCase("y"))
+                        {
+                            wildlifeTokens = setup.wildlifeTokens();
+                            System.out.println("Your wildlife tokens are: " + wildlifeTokens);
+                            break;
+                        }
+                        else if (in.equalsIgnoreCase("n"))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Invalid input. Try again.");
+                        }
+                    }
+
                     List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(habitatTiles, wildlifeTokens);
                     setup.replacePairs(habitatTiles, wildlifeTokens, selectedTileAndToken);
 
