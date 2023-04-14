@@ -155,6 +155,45 @@ public class Setup
         return wildlifeTokens;
     }
 
+    boolean automaticCull(ArrayList<List<TilesAndTokens>> wildlifeTokens)
+    {
+        boolean cull = false;
+        List<TilesAndTokens> firstToken = wildlifeTokens.get(0);
+
+        for (int i = 1; i < wildlifeTokens.size(); i++)
+        {
+            List<TilesAndTokens> currentToken = wildlifeTokens.get(i);
+            if(!firstToken.equals(currentToken))
+            {
+                return false;
+
+            }
+
+        }
+
+        System.out.println("Cull Required, Replacing WildLife Tokens ");
+        return true;
+
+    }
+
+
+    boolean optionalCull(ArrayList<List<TilesAndTokens>> wildlifeTokens) {
+        int numMatches = 0;
+        List<TilesAndTokens> firstMatch = null;
+        for (List<TilesAndTokens> token : wildlifeTokens)
+        {
+            if (firstMatch == null)
+            {
+                firstMatch = token;
+            }
+            else if (token.equals(firstMatch))
+            {
+                numMatches++;
+            }
+        }
+        return numMatches == 2;
+    }
+
     // Function that allows to the users to take turns
     public int takeTurn(Scanner scan, int turnCounter) {
         User currentUser = getUserByTurn(turnCounter);
