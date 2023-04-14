@@ -168,15 +168,13 @@ public class Setup
     // Function that gets the selected tile and token from the user
     public void getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<TilesAndTokens> wildlifeTokens) {
         while (true) {
-            System.out.println("Please select a habitat tile (1,2,3,4 respectively):");
-            int selectedTile = scan.nextInt();
-            System.out.println("Please select a wildlife token (1,2,3,4 respectively):");
-            int selectedToken = scan.nextInt();
-            if (selectedTile > 4 || selectedTile < 1 || selectedToken > 4 || selectedToken < 1) {
+            System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
+            int input = scan.nextInt();
+            if (input > 4 || input < 1) {
                 System.out.println("Invalid input. Try again.");
             } else {
-                List<TilesAndTokens> habitat = habitatTiles.get(selectedTile - 1);
-                List<TilesAndTokens> wildlife = Collections.singletonList(wildlifeTokens.get(selectedToken - 1));
+                List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
+                List<TilesAndTokens> wildlife = Collections.singletonList(wildlifeTokens.get(input - 1));
                 System.out.println(habitat + " " + wildlife);
                 break;
             }
@@ -193,5 +191,6 @@ public class Setup
             }
         }
     }
+
 
 }
