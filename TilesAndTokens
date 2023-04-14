@@ -19,9 +19,11 @@ public enum TilesAndTokens {
     SALMON(HabitatAndWildlife.SALMON, TilesAndTokensColour.RED),
     SALMONTOKEN(HabitatAndWildlife.SALMONTOKEN, TilesAndTokensColour.BLACK),
     FOX(HabitatAndWildlife.FOX, TilesAndTokensColour.ORANGE),
-    FOXTOKEN(HabitatAndWildlife.FOXTOKEN, TilesAndTokensColour.BLACK);
+    FOXTOKEN(HabitatAndWildlife.FOXTOKEN, TilesAndTokensColour.BLACK),
+    NATURE(HabitatAndWildlife.NATURE, TilesAndTokensColour.DARKGREEN);
     private HabitatAndWildlife symbol;
     private TilesAndTokensColour colour;
+    
     TilesAndTokens (HabitatAndWildlife symbol, TilesAndTokensColour colour) {
         this.symbol = symbol;
         this.colour = colour;
