@@ -523,89 +523,10 @@ public class HabitatTiles {
          System.out.println();
       }
    }
-   protected static ArrayList<String[][]> list = new ArrayList<String[][]>();
-
+   
    public static void main(String[] args){
 
-      list.add(forrest1);
-      list.add(forrest2);
-      list.add(forrest3);
-      list.add(forrestandPrairie1);
-      list.add(forrestandPrairie2);
-      list.add(forrestandPrairie3);
-      list.add(forrestandPrairie4);
-      list.add(forrestandPrairie5);
-      list.add(forrestandPrairie6);
-      list.add(forrestandwetland1);
-      list.add(forrestandwetland2);
-      list.add(forrestandwetland3);
-      list.add(forrestandwetland4);
-      list.add(forrestandwetland5);
-      list.add(forrestandwetland6);
-      list.add(mountainandforrest1);
-      list.add(mountainandforrest2);
-      list.add(mountainandforrest3);
-      list.add(mountainandforrest4);
-      list.add(mountainandforrest5);
-      list.add(mountainandforrest6);
-      list.add(mountainandriver2);
-      list.add(mountainandriver3);
-      list.add(mountainandriver1);
-      list.add(mountainandriver4);
-      list.add(mountainandriver5);
-      list.add(mountainandriver6);
-      list.add(wetlandandprairie1);
-      list.add(wetlandandprairie2);
-      list.add(wetlandandprairie3);
-      list.add(wetlandandprairie4);
-      list.add(wetlandandprairie5);
-      list.add(wetlandandprairie6);
-      list.add(wetlandandmountain1);
-      list.add(wetlandandmountain2);
-      list.add(wetlandandmountain3);
-      list.add(wetlandandmountain4);
-      list.add(wetlandandmountain5);
-      list.add(wetlandandmountain6);
-      list.add(wetlandandriver1);
-      list.add(wetlandandriver2);
-      list.add(wetlandandriver3);
-      list.add(wetlandandriver4);
-      list.add(wetlandandriver5);
-      list.add(wetlandandriver6);
-      list.add(wetland1);
-      list.add(wetland2);
-      list.add(wetland3);
-      list.add(prairie1);
-      list.add(prairie2);
-      list.add(prairie3);
-      list.add(prairieandmountain1);
-      list.add(prairieandmountain2);
-      list.add(prairieandmountain3);
-      list.add(prairieandmountain4);
-      list.add(prairieandmountain5);
-      list.add(prairieandmountain6);
-      list.add(prairieandriver1);
-      list.add(prairieandriver2);
-      list.add(prairieandriver3);
-      list.add(prairieandriver4);
-      list.add(prairieandriver5);
-      list.add(prairieandriver6);
-      list.add(river3);
-      list.add(river2);
-      list.add(river1);
-      list.add(mountain1);
-      list.add(mountain2);
-      list.add(mountain3);
-      list.add(riverandforrest1);
-      list.add(riverandforrest2);
-      list.add(riverandforrest3);
-      list.add(riverandforrest4);
-      list.add(riverandforrest5);
-      list.add(riverandforrest6);
-
-
-   printTiles(starterhabitat1);
-   }
+    
 
 }
 
