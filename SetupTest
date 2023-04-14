@@ -1,0 +1,40 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SetupTest {
+    @Test
+    public void testSetStarterHabitatTile() {
+        User user = new User("Zeina", 1);
+        Setup setup = new Setup();
+        setup.addUser(user);
+        ArrayList<List<TilesAndTokens>> userStarterTile = setup.setStarterHabitatTile(user);
+        assertNotNull(userStarterTile);
+    }
+
+    @Test
+    public void testHabitatTiles() {
+        Setup setup = new Setup();
+        ArrayList<List<TilesAndTokens>> habitatTiles = setup.habitatTiles();
+        assertNotNull(habitatTiles);
+    }
+
+    @Test
+    public void testWildlifeTokens() {
+        Setup setup = new Setup();
+        ArrayList<List<TilesAndTokens>> wildlifeTokens = setup.wildlifeTokens();
+        assertNotNull(wildlifeTokens);
+    }
+
+    @Test
+    public void testTurnCalculation() {
+        User user1 = new User("Salman", 1);
+        User user2 = new User("Chidimma", 2);
+        Setup setup = new Setup();
+        setup.addUser(user1);
+        setup.addUser(user2);
+        int turn = setup.turnCalculation();
+        assertEquals(turn, 1);
+    }
+}
