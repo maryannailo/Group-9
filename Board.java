@@ -83,6 +83,7 @@ public class Board {
                         replace(tileChosen,oldStr,newStr);
                         break;
                     }
+                    default -> System.out.println("Cannot place this token onto the tile");
                 }
             }
         }
