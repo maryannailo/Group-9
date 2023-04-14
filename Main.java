@@ -50,6 +50,12 @@ public class Main
         }
 
         turnCounter = setup.turnCalculation();
+        
+                Scoring.bearScore();
+        Scoring.foxScore();
+        Scoring.elkScore();
+        Scoring.hawkScore();
+        Scoring.salmonScore();
 
         while(choice!=2)
         {
