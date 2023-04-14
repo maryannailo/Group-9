@@ -7,5 +7,6 @@ public enum TilesAndTokensColour {
     BROWN,
     BLACK,
     RED,
+    PURPLE,
     ORANGE
 }
