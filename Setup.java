@@ -4,10 +4,9 @@ public class Setup
 {
     Display display = new Display();
     Scanner scan = new Scanner(System.in);
-    static Random random = new Random(); // to generate random numbers
-    private List<User> userList = new ArrayList<>(); // list to store user objects
+    static Random random = new Random();
+    private List<User> userList = new ArrayList<>();
     private TilesAndTokens placedToken;
-
 
     // add a user to the list
     void addUser(User user)
@@ -28,11 +27,9 @@ public class Setup
     // Calculates turn order randomly
     int turnCalculation() {
         List<Integer> turns = new ArrayList<>();
-        // add turn numbers to the list based on the number of User objects
         for (int i = 1; i <= userList.size(); i++) {
             turns.add(i);
         }
-        // Shuffle the turn numbers and return the first one
         Collections.shuffle(turns);
         return turns.get(0);
     }
@@ -77,7 +74,6 @@ public class Setup
 
     // Arraylist of possible keystones
     private static ArrayList<List<TilesAndTokens>> keystone() {
-        //add keystones
         ArrayList<List<TilesAndTokens>> keystone = new ArrayList<>();
         // 25 keystones (5 * 5)
         for (int i = 0; i < 5; i++) {
@@ -103,13 +99,12 @@ public class Setup
             wildlifeTokens.add(TilesAndTokens.FOX);
         }
 
-        // shuffle tokens
         Collections.shuffle(wildlifeTokens);
 
         return wildlifeTokens;
     }
 
-    private ArrayList<TilesAndTokens> natureTokens() {
+    protected static ArrayList<TilesAndTokens> natureTokens() {
         ArrayList<TilesAndTokens> natureTokens = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             natureTokens.add(TilesAndTokens.NATURE);
@@ -118,9 +113,8 @@ public class Setup
     }
 
     // Return the starter tile for each user
-    ArrayList<List<TilesAndTokens>> setStarterHabitatTile(User user) {
+    protected ArrayList<List<TilesAndTokens>> setStarterHabitatTile(User user) {
         ArrayList<List<TilesAndTokens>> starterHabitatTiles = new ArrayList<>();
-        ArrayList<List<TilesAndTokens>> habitatTiles = habitats();
 
         // Choose one keystone randomly
         List<TilesAndTokens> keystone = new ArrayList<>();
@@ -134,21 +128,74 @@ public class Setup
             case 4 -> keystone.add(TilesAndTokens.PRAIRIEKEY);
         }
 
-        // Choose two habitat tiles randomly
-        Collections.shuffle(habitatTiles);
+        List<TilesAndTokens> tiles1 = new ArrayList<>();
+        List<TilesAndTokens> tiles2 = new ArrayList<>();
 
-        List<TilesAndTokens> tiles1 = habitatTiles.get(0);
-        List<TilesAndTokens> tiles2 = habitatTiles.get(1);
+        if (keystone.equals(List.of(TilesAndTokens.MOUNTAINKEY))) {
+            tiles1.add(TilesAndTokens.FOREST);
+            tiles1.add(TilesAndTokens.WETLAND);
 
-        starterHabitatTiles.add(keystone);
-        starterHabitatTiles.add(tiles1);
-        starterHabitatTiles.add(tiles2);
+            tiles2.add(TilesAndTokens.RIVER);
+            tiles2.add(TilesAndTokens.PRAIRIE);
+
+            starterHabitatTiles.add(keystone);
+            starterHabitatTiles.add(tiles1);
+            starterHabitatTiles.add(tiles2);
+        }
+
+        if (keystone.equals(List.of(TilesAndTokens.FORESTKEY))) {
+            tiles1.add(TilesAndTokens.MOUNTAIN);
+            tiles1.add(TilesAndTokens.RIVER);
+
+            tiles2.add(TilesAndTokens.WETLAND);
+            tiles2.add(TilesAndTokens.PRAIRIE);
+
+            starterHabitatTiles.add(keystone);
+            starterHabitatTiles.add(tiles1);
+            starterHabitatTiles.add(tiles2);
+        }
+
+        if (keystone.equals(List.of(TilesAndTokens.WETLANDKEY))) {
+            tiles1.add(TilesAndTokens.RIVER);
+            tiles1.add(TilesAndTokens.FOREST);
+
+            tiles2.add(TilesAndTokens.MOUNTAIN);
+            tiles2.add(TilesAndTokens.PRAIRIE);
+
+            starterHabitatTiles.add(keystone);
+            starterHabitatTiles.add(tiles1);
+            starterHabitatTiles.add(tiles2);
+        }
+
+        if (keystone.equals(List.of(TilesAndTokens.PRAIRIEKEY))) {
+            tiles1.add(TilesAndTokens.WETLAND);
+            tiles1.add(TilesAndTokens.RIVER);
+
+            tiles2.add(TilesAndTokens.FOREST);
+            tiles2.add(TilesAndTokens.MOUNTAIN);
+
+            starterHabitatTiles.add(keystone);
+            starterHabitatTiles.add(tiles1);
+            starterHabitatTiles.add(tiles2);
+        }
+
+        if (keystone.equals(List.of(TilesAndTokens.RIVERKEY))) {
+            tiles1.add(TilesAndTokens.PRAIRIE);
+            tiles1.add(TilesAndTokens.FOREST);
+
+            tiles2.add(TilesAndTokens.WETLAND);
+            tiles2.add(TilesAndTokens.PRAIRIE);
+
+            starterHabitatTiles.add(keystone);
+            starterHabitatTiles.add(tiles1);
+            starterHabitatTiles.add(tiles2);
+        }
 
         return starterHabitatTiles;
     }
 
     // Return shuffled habitat tiles
-    ArrayList<List<TilesAndTokens>> habitatTiles() {
+    protected ArrayList<List<TilesAndTokens>> habitatTiles() {
         ArrayList<List<TilesAndTokens>> habitats = allTiles();
         ArrayList<List<TilesAndTokens>> habitatTiles = new ArrayList<>();
 
@@ -160,7 +207,7 @@ public class Setup
     }
 
     // Return shuffled wildlife tokens
-    ArrayList<List<TilesAndTokens>> wildlifeTokens() {
+    protected ArrayList<List<TilesAndTokens>> wildlifeTokens() {
         ArrayList<List<TilesAndTokens>> wildlifeTokens = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
@@ -188,9 +235,7 @@ public class Setup
 
         System.out.println("Cull Required, Replacing WildLife Tokens ");
         return true;
-
     }
-
 
     boolean optionalCull(ArrayList<List<TilesAndTokens>> wildlifeTokens) {
         int numMatches = 0;
@@ -209,7 +254,7 @@ public class Setup
         return numMatches == 2;
     }
 
-    // Function that allows to the users to take turns
+    // Allows to the users to take turns
     public int takeTurn(Scanner scan, int turnCounter) {
         User currentUser = getUserByTurn(turnCounter);
         System.out.println("It is " + currentUser.getName() + "'s turn.");
@@ -217,19 +262,16 @@ public class Setup
         return scan.nextInt();
     }
 
-    // Function that gets the selected tile and token from the user
+    // Gets the selected tile and token from the user
     public List<List<TilesAndTokens>> getSelectedTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens) {
         List<List<TilesAndTokens>> selectedTileAndToken = new ArrayList<>();
         while (true) {
             System.out.print("Please select a habitat tile and wildlife token pair (1,2,3,4 respectively): ");
             int input = scan.nextInt();
             // error handling if there's incorrect input
-            if (input > 4 || input < 1)
-            {
+            if (input > 4 || input < 1) {
                 System.out.println("Invalid input. Try again.");
-            }
-            else
-            {
+            } else {
                 // get the value of the habitat tile and wildlife token using the input as the index
                 List<TilesAndTokens> habitat = habitatTiles.get(input - 1);
                 List<TilesAndTokens> wildlife = wildlifeTokens.get(input - 1);
@@ -240,6 +282,13 @@ public class Setup
             }
         }
         return selectedTileAndToken;
+    }
+
+    public void getNatureToken(List<List<TilesAndTokens>> selectedTileAndToken, User user) {
+       // if (/*token is on keystone*/) {
+            user.addNatureToken();
+            System.out.println("You have earned a nature token!");
+     //   }
     }
 
     public boolean isMatch(List<List<TilesAndTokens>> selectedTileAndToken)
@@ -258,12 +307,12 @@ public class Setup
         } else if (habitatSymbol.equals(HabitatAndWildlife.PRAIRIE.toString())) {
             return wildlifeSymbol.equals(HabitatAndWildlife.ELK.toString());
         }
-
         return false;
     }
 
     // Function to replace selected tile and token
     public void replacePairs(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens, List<List<TilesAndTokens>> selectedTileAndToken) {
+        System.out.println("You selected: " + selectedTileAndToken);
         for (int i = 0; i < habitatTiles.size(); i++) {
             // if the first element of the list (which is a tile) is equal to the element at index i, replace the element with a new habitat tile
             if (selectedTileAndToken.get(0) == habitatTiles.get(i)) {
