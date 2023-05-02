@@ -50,14 +50,16 @@ public class Main
         }
 
         turnCounter = setup.turnCalculation();
-        
-                Scoring.bearScore();
+
+        turnCounter = setup.turnCalculation();
+
+        Scoring.bearScore();
         Scoring.foxScore();
         Scoring.elkScore();
         Scoring.hawkScore();
         Scoring.salmonScore();
 
-        while(choice!=2)
+        while(choice!=3)
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
@@ -66,6 +68,7 @@ public class Main
             //Print out the name of the current persons turn and what turn it is
             switch(choice) {
                 case 1: //Play turn
+
                     List<List<TilesAndTokens>> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> currentHabitatTiles = allHabitatTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> currentWildlifeTokens = allWildlifeTokens.get(currentUser.getTurn() - 1);
@@ -102,14 +105,14 @@ public class Main
                         }
                     } else {
                         List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, currentWildlifeTokens);
-                        
+
                     /*
                     if(!setup.isMatch(selectedTileAndToken))
                     {
                         System.out.println("The following token cannot be placed.");
                     }
                      */
-                        
+
                         setup.replacePairs(currentHabitatTiles, currentWildlifeTokens, selectedTileAndToken);
                     }
 
@@ -131,7 +134,7 @@ public class Main
 
                     if (setup.isGameEnd()) {
                         System.out.println("Game is over!");
-                        choice = 2;
+                        break;
                     }
 
                 case 2: //Skip turn
