@@ -6,7 +6,6 @@ public class Setup
     Scanner scan = new Scanner(System.in);
     static Random random = new Random();
     private List<User> userList = new ArrayList<>();
-    private TilesAndTokens placedToken;
 
     // add a user to the list
     void addUser(User user)
@@ -288,7 +287,91 @@ public class Setup
        // if (/*token is on keystone*/) {
             user.addNatureToken();
             System.out.println("You have earned a nature token!");
-     //   }
+     //   } else {
+    }
+
+    public void spendNatureToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens, User user) {
+        user.spendToken();
+        display.displayNatureTokenMenu();
+        int input;
+        boolean validInput = false;
+
+        while (!validInput) {
+            input = scan.nextInt();
+            switch (input) {
+                case 1:
+                    selectAnyTileAndToken(habitatTiles, wildlifeTokens);
+                    validInput = true;
+                    break;
+                case 2:
+                    wipeWildlifeTokens(wildlifeTokens);
+                    validInput = true;
+                    break;
+                default:
+                    System.out.println("Invalid option, please enter 1 or 2: ");
+                    break;
+            }
+        }
+    }
+
+    private void selectAnyTileAndToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens) {
+        List<List<TilesAndTokens>> selectedTileAndToken = new ArrayList<>();
+
+        while (true) {
+            System.out.print("Please select a habitat tile (1,2,3,4 respectively): ");
+            int tileInput = scan.nextInt();
+            System.out.print("Please select a wildlife token (1,2,3,4 respectively): ");
+            int tokenInput = scan.nextInt();
+            // error handling if there's incorrect input
+            if (tileInput > 4 || tileInput < 1 || tokenInput > 4 || tokenInput < 1) {
+                System.out.println("Invalid input. Try again.");
+            } else {
+                // get the value of the habitat tile and wildlife token using the input as the index
+                List<TilesAndTokens> habitat = habitatTiles.get(tileInput - 1);
+                List<TilesAndTokens> wildlife = wildlifeTokens.get(tokenInput - 1);
+                // add the elements to the list of selected tile and token pair
+                selectedTileAndToken.add(habitat);
+                selectedTileAndToken.add(wildlife);
+                break;
+            }
+        }
+        System.out.println("You selected: " + selectedTileAndToken);
+    }
+    private void wipeWildlifeTokens(ArrayList<List<TilesAndTokens>> wildlifeTokens) {
+        ArrayList<List<TilesAndTokens>> tokens = wildlifeTokens();
+        HashSet<Integer> changedIndices = new HashSet<>();
+        int numChanged = 0;
+
+        System.out.println("Pick the wildlife tokens you want to clear (1, 2, 3, 4 respectively), or enter 0 to finish: ");
+        int input = scan.nextInt();
+
+        while (input != 0) {
+            int index = new Random().nextInt(tokens.size());
+
+            if (input >= 1 && input <= 4) {
+                if (changedIndices.contains(input-1)) {
+                    System.out.println("Element has already been changed. Please pick a different element to clear.");
+                } else {
+                    changedIndices.add(input-1);
+                    numChanged++;
+                    wildlifeTokens.remove(input-1);
+                    wildlifeTokens.add(input-1, tokens.get(index));
+
+                    // if all elements have been changed
+                    if (numChanged == 4) {
+                        System.out.println("All elements have been changed.");
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("Invalid input.");
+            }
+
+            System.out.println("Pick another element or enter 0 to finish: ");
+            input = scan.nextInt();
+        }
+
+        System.out.println("Your new wildlife tokens are: " + wildlifeTokens);
     }
 
     public boolean isMatch(List<List<TilesAndTokens>> selectedTileAndToken)
