@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Board {
     public static void printBoard(String[][][] board) {
         int numRows = board.length;
@@ -43,7 +41,7 @@ public class Board {
 
     //this will replace the potential token in the string and make it the actual token
     //chosen by the player
-    private static String replace (String[][] arr, String oldSubstr, String newSubstr){
+    private static void replace (String[][] arr, String oldSubstr, String newSubstr){
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
                 if (arr[i][j].contains(oldSubstr)) {
@@ -51,10 +49,8 @@ public class Board {
                 }
             }
         }
-        return Arrays.toString(arr);
     }
 
-    //This is for the nature token, this will check if a tile has a nature token inside, when the player places a token onto the tile
     private static boolean checkSequence2DString(String[][] tileChosen){
         String sequence = new String(String.valueOf(TilesAndTokens.KEY.getSymbol()));
         for (int i = 0; i < tileChosen.length; i++) {
@@ -80,7 +76,7 @@ public class Board {
                     case "E" -> {
                         newStr = String.valueOf(TilesAndTokens.ELKTOKEN.getSymbol());
                         replace(tileChosen, oldStr, newStr);
-                        if (checkSequence2DString(tileChosen) == true) {
+                        if (checkSequence2DString(tileChosen)) {
                             System.out.println("Nature Token added");
                             user.addNatureToken();
                         }
@@ -89,7 +85,7 @@ public class Board {
                     case "F" -> {
                         newStr = String.valueOf(TilesAndTokens.FOXTOKEN.getSymbol());
                         replace(tileChosen, oldStr, newStr);
-                        if (checkSequence2DString(tileChosen) == true) {
+                        if (checkSequence2DString(tileChosen)) {
                             System.out.println("Nature Token added");
                             user.addNatureToken();
                         }
@@ -98,7 +94,7 @@ public class Board {
                     case "H" -> {
                         newStr = String.valueOf(TilesAndTokens.HAWKTOKEN.getSymbol());
                         replace(tileChosen, oldStr, newStr);
-                        if (checkSequence2DString(tileChosen) == true) {
+                        if (checkSequence2DString(tileChosen)) {
                             System.out.println("Nature Token added");
                             user.addNatureToken();
                         }
@@ -107,7 +103,7 @@ public class Board {
                     case "S" -> {
                         newStr = String.valueOf(TilesAndTokens.SALMONTOKEN.getSymbol());
                         replace(tileChosen, oldStr, newStr);
-                        if (checkSequence2DString(tileChosen) == true) {
+                        if (checkSequence2DString(tileChosen)) {
                             System.out.println("Nature Token added");
                             user.addNatureToken();
                         }
@@ -116,7 +112,7 @@ public class Board {
                     case "B" -> {
                         newStr = String.valueOf(TilesAndTokens.BEARTOKEN.getSymbol());
                         replace(tileChosen, oldStr, newStr);
-                        if (checkSequence2DString(tileChosen) == true) {
+                        if (checkSequence2DString(tileChosen)) {
                             System.out.println("Nature Token added");
                             user.addNatureToken();
                         }
@@ -128,18 +124,84 @@ public class Board {
         }
     }
 
-    public static String[][] swapColors(String[][] array) {
+    private static String[][] swapColours(String[][] array, String leftColour, String rightColour) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                if (array[i][j].contains(DisplayColour.LIGHTGREEN) && j < 3) {
-                    array[i][j] = array[i][j].replace(DisplayColour.LIGHTGREEN, DisplayColour.YELLOW);
-                } else if (array[i][j].contains(DisplayColour.YELLOW) && j > 3) {
-                    array[i][j] = array[i][j].replace(DisplayColour.YELLOW, DisplayColour.LIGHTGREEN);
+                if (array[i][j].contains(leftColour)) {
+                    array[i][j] = array[i][j].replace(leftColour, DisplayColour.RESET);
+                    array[i][j] = array[i][j].replace(rightColour, leftColour);
+                    array[i][j] = array[i][j].replace(DisplayColour.RESET, rightColour);
                 }
             }
         }
         return array;
     }
 
+
+//This method will swap the colours of the tile from left to right depending on the tile chosen by the player using the method swapColours
+    public static String[][] rotate(String[][] tileChosen, int colourOption){
+       String leftColour = null;
+       String rightColour = null;
+       if (colourOption < 1 || colourOption > 10){
+           throw new RuntimeException("Choose a number between 1 and 10");
+       }else{
+           switch (colourOption){
+               case 1:
+                   //Tile is forest and prairie
+                   leftColour = DisplayColour.DARKGREEN;
+                   rightColour = DisplayColour.YELLOW;
+                   break;
+               case 2:
+                   //Tile is forest and wetland
+                   leftColour = DisplayColour.DARKGREEN;
+                   rightColour = DisplayColour.LIGHTGREEN;
+                   break;
+               case 3:
+                   //Tile is wetland and prairie
+                   leftColour = DisplayColour.LIGHTGREEN;
+                   rightColour = DisplayColour.YELLOW;
+                   break;
+               case 4:
+                   //Tile is wetland and mountain
+                   leftColour = DisplayColour.LIGHTGREEN;
+                   rightColour = DisplayColour.GREY;
+                   break;
+               case 5:
+                   //Tile is prairie and mountain
+                   leftColour = DisplayColour.YELLOW;
+                   rightColour = DisplayColour.GREY;
+                   break;
+               case 6:
+                   //Tile is wetland and river
+                   leftColour = DisplayColour.LIGHTGREEN;
+                   rightColour = DisplayColour.BLUE;
+                   break;
+               case 7:
+                   //Tile is mountain and river
+                   leftColour = DisplayColour.GREY;
+                   rightColour = DisplayColour.BLUE;
+                   break;
+               case 8:
+                   //Tile is river and forest
+                   leftColour = DisplayColour.BLUE;
+                   rightColour = DisplayColour.DARKGREEN;
+                   break;
+               case 9:
+                   //Tile is prairie and river
+                   leftColour = DisplayColour.YELLOW;
+                   rightColour = DisplayColour.BLUE;
+                   break;
+               case 10:
+                   //Tile is mountain and forest
+                   leftColour = DisplayColour.GREY;
+                   rightColour = DisplayColour.DARKGREEN;
+                   break;
+               default:
+                   System.out.println("Please choose another option between 1 and 10");
+           }
+        return swapColours(tileChosen, leftColour,rightColour);
+       }
+    }
 }
+
 
