@@ -13,7 +13,6 @@ public class Main
         Scanner scan = new Scanner(System.in);
         int choice = 0;
         String name;
-        int turn;
         int turnCounter;
         int numPlayers = 0;
         List<ArrayList<List<TilesAndTokens>>> allStarterTiles = new ArrayList<>();
@@ -51,8 +50,6 @@ public class Main
 
         turnCounter = setup.turnCalculation();
 
-        turnCounter = setup.turnCalculation();
-
         Scoring.bearScore();
         Scoring.foxScore();
         Scoring.elkScore();
@@ -68,7 +65,6 @@ public class Main
             //Print out the name of the current persons turn and what turn it is
             switch(choice) {
                 case 1: //Play turn
-
                     List<List<TilesAndTokens>> currentStarterTiles = allStarterTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> currentHabitatTiles = allHabitatTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> currentWildlifeTokens = allWildlifeTokens.get(currentUser.getTurn() - 1);
@@ -80,12 +76,15 @@ public class Main
                     ArrayList<List<TilesAndTokens>> replacedTokens1;
                     ArrayList<List<TilesAndTokens>> replacedTokens2;
 
+                    List<TilesAndTokens> tileChosen = new ArrayList<>();
+
                     if (setup.automaticCull(currentWildlifeTokens)) {
                         replacedTokens1 = setup.wildlifeTokens();
                         currentWildlifeTokens = replacedTokens1;
                         System.out.println("Your habitat tiles are: " + currentHabitatTiles);
                         System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
                         List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens1);
+                        tileChosen = selectedTileAndToken.get(0);
                         setup.replacePairs(currentHabitatTiles, replacedTokens1, selectedTileAndToken);
                     } else if (setup.optionalCull(currentWildlifeTokens)) {
                         System.out.println("You have the option to execute a cull (y/n)");
@@ -96,6 +95,7 @@ public class Main
                             System.out.println("Your habitat tiles are: " + currentHabitatTiles);
                             System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
                             List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens2);
+                            tileChosen = selectedTileAndToken.get(0);
                             setup.replacePairs(currentHabitatTiles, replacedTokens2, selectedTileAndToken);
 
                         } else if (in.equalsIgnoreCase("n")) {
@@ -105,7 +105,7 @@ public class Main
                         }
                     } else {
                         List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, currentWildlifeTokens);
-
+                        tileChosen = selectedTileAndToken.get(0);
                     /*
                     if(!setup.isMatch(selectedTileAndToken))
                     {
@@ -125,6 +125,12 @@ public class Main
                             // Do not place token
                             break;
                         } else if (tokenChoice.equalsIgnoreCase("y")) {
+                            String[][] tile = new String[][]{{tileChosen.toString()}};
+                            String oldStr = null;
+                            int col = 0;
+                            int row = 0;
+                            String[][][] board = new String[50][50][50];
+                            Board.placeToken(board, tile, row, col, oldStr, currentUser);
                             validInput = true;
                             // Continue with token placement code
                         } else {
