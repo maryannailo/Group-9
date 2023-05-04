@@ -17,6 +17,13 @@ public class Display {
         System.out.println("2. Next player");
         System.out.println("3. Quit");
     }
+    
+    public void displayNatureTokenMenu() {
+        System.out.println("Would you like to use your nature token to:");
+        System.out.println("1. Select any wildlife and habitat token.");
+        System.out.println("2. Wipe any number of wildlife tokens.");
+        System.out.println("Please enter 1 or 2.");
+    }
 
     public void displayPlayNotPossible () {
         System.out.println("That play is not possible. Try again.");
