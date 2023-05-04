@@ -10,7 +10,6 @@ public class Display {
 
     }
 
-
     public void displayMenu() {
         System.out.println("What would you like to do?");
         System.out.println("1. Play turn");
