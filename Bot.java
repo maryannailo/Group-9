@@ -9,18 +9,19 @@ public class Bot
 
     public static String getCullChoice()
     {
+        String answer = "";
         switch((Math.random() <= 0.5) ? 1 : 2)
         {
             case 1:
-                return "y";
+                answer = "y";
 
 
             case 2:
-                return "n";
+                answer = "n";
 
 
         }
-
-
+        return answer;
+        
     }
 }
