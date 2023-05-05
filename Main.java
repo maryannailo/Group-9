@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 public class Main
@@ -70,7 +71,13 @@ public class Main
                     ArrayList<List<TilesAndTokens>> currentHabitatTiles = allHabitatTiles.get(currentUser.getTurn() - 1);
                     ArrayList<List<TilesAndTokens>> currentWildlifeTokens = allWildlifeTokens.get(currentUser.getTurn() - 1);
 
-                    System.out.println("Your starter tile is: " + currentStarterTiles);
+                    String[][] starterTile = HabitatTiles.displayStarterTile(currentStarterTiles);
+
+                    System.out.println("Your starter tile is now on the board:");
+                    // display the board in the middle
+                    Board.placeTile(board, starterTile, 25, 25);
+                    Board.printBoard(board);
+
                     System.out.println("Your habitat tiles are: " + currentHabitatTiles);
                     System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
 
@@ -78,6 +85,7 @@ public class Main
                     ArrayList<List<TilesAndTokens>> replacedTokens2;
 
                     List<TilesAndTokens> tileChosen = new ArrayList<>();
+                    List<TilesAndTokens> tokenChosen = new ArrayList<>();
 
                     if (setup.automaticCull(currentWildlifeTokens)) {
                         replacedTokens1 = setup.wildlifeTokens();
@@ -86,6 +94,7 @@ public class Main
                         System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
                         List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens1);
                         tileChosen = selectedTileAndToken.get(0);
+                        tokenChosen = selectedTileAndToken.get(1);
                         setup.replacePairs(currentHabitatTiles, replacedTokens1, selectedTileAndToken);
                     } else if (setup.optionalCull(currentWildlifeTokens)) {
                         System.out.println("You have the option to execute a cull (y/n)");
@@ -97,6 +106,7 @@ public class Main
                             System.out.println("Your wildlife tokens are: " + currentWildlifeTokens);
                             List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, replacedTokens2);
                             tileChosen = selectedTileAndToken.get(0);
+                            tokenChosen = selectedTileAndToken.get(1);
                             setup.replacePairs(currentHabitatTiles, replacedTokens2, selectedTileAndToken);
 
                         } else if (in.equalsIgnoreCase("n")) {
@@ -107,6 +117,7 @@ public class Main
                     } else {
                         List<List<TilesAndTokens>> selectedTileAndToken = setup.getSelectedTileAndToken(currentHabitatTiles, currentWildlifeTokens);
                         tileChosen = selectedTileAndToken.get(0);
+                        tokenChosen = selectedTileAndToken.get(1);
                     /*
                     if(!setup.isMatch(selectedTileAndToken))
                     {
@@ -116,6 +127,7 @@ public class Main
 
                         setup.replacePairs(currentHabitatTiles, currentWildlifeTokens, selectedTileAndToken);
                     }
+
                     System.out.println("Where do you want to place " + tileChosen);
                     System.out.println("Enter row number: ");
                     int row = scan.nextInt();
@@ -123,7 +135,7 @@ public class Main
                     int column = scan.nextInt();
 
                    // Board.placeTile(board, starterTile, 25, 25);
-                    String[][] tile = HabitatTiles.convertToDisplay(tileChosen);
+                    String[][] tile = HabitatTiles.convertTileToDisplay(tileChosen);
                     Board.placeTile(board, tile, row, column);
                     Board.printBoard(board);
 
