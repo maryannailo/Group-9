@@ -155,7 +155,7 @@ public class Main
                     // Allow the user not to place token
                     boolean validInput = false;
                     while (!validInput) {
-                        System.out.println("Do you want to place the token " + tokenChosen + "? (y/n)");
+                        System.out.println("Do you want to place the token " + tokenChosen.get(0).getSymbol() + "? (y/n)");
                         String tokenChoice = scan.next();
                         if (tokenChoice.equalsIgnoreCase("n")) {
                             // Do not place token
