@@ -67,6 +67,7 @@ public class Setup
                     possibleTiles.add(habitatTiles);
                 }
             }
+
         }
         return possibleTiles;
     }
@@ -284,10 +285,10 @@ public class Setup
     }
 
     public void getNatureToken(List<List<TilesAndTokens>> selectedTileAndToken, User user) {
-       // if (/*token is on keystone*/) {
-            user.addNatureToken();
-            System.out.println("You have earned a nature token!");
-     //   } else {
+        // if (/*token is on keystone*/) {
+        user.addNatureToken();
+        System.out.println("You have earned a nature token!");
+        //   } else {
     }
 
     public void spendNatureToken(ArrayList<List<TilesAndTokens>> habitatTiles, ArrayList<List<TilesAndTokens>> wildlifeTokens, User user) {
@@ -400,7 +401,6 @@ public class Setup
             // if the first element of the list (which is a tile) is equal to the element at index i, replace the element with a new habitat tile
             if (selectedTileAndToken.get(0) == habitatTiles.get(i)) {
                 habitatTiles.set(i, habitatTiles().get(0));
-                System.out.println("Your new habitat tiles are: " + habitatTiles);
             }
         }
 
@@ -408,7 +408,6 @@ public class Setup
             // if the second element of the list (which is a token) is equal to the element at index j, replace the element with a new wildlife token
             if (selectedTileAndToken.get(1) == wildlifeTokens.get(j)) {
                 wildlifeTokens.set(j, wildlifeTokens().get(0));
-                System.out.println("Your new wildlife tokens are: " + wildlifeTokens);
             }
         }
     }
