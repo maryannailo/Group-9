@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main
 {
     static Setup setup = new Setup();
+    static String in;
     static Display display = new Display();
 
     public static void main(String[] args)
@@ -16,10 +17,13 @@ public class Main
         int choice = 0;
         String name;
         int turnCounter;
-        int numPlayers = 0;
+        int numPlayers = 2;
         List<ArrayList<List<TilesAndTokens>>> allStarterTiles = new ArrayList<>();
         List<ArrayList<List<TilesAndTokens>>> allHabitatTiles = new ArrayList<>();
         List<ArrayList<List<TilesAndTokens>>> allWildlifeTokens = new ArrayList<>();
+
+
+        /*
 
         while (numPlayers < 2 || numPlayers > 4) {
             //Add Error handling in case input is not between 2 and 4
@@ -35,11 +39,12 @@ public class Main
             }
         }
 
-        for(int x = 1; x<=numPlayers; x++)
-        {
-            System.out.println("Please enter player " + x + "'s name:");
-            name = scan.nextLine();
-            User user = new User(name, x);
+ */
+        System.out.println("Please enter player 1's name:");
+        name = scan.nextLine();
+
+
+            User user = new User(name, 1);
             setup.addUser(user);
             //Add users
             ArrayList<List<TilesAndTokens>> userStarterTile = setup.setStarterHabitatTile(user);
@@ -48,7 +53,18 @@ public class Main
             allStarterTiles.add(userStarterTile);
             allHabitatTiles.add(userHabitatTiles);
             allWildlifeTokens.add(userWildlifeTokens);
-        }
+
+             User bot = new User("Bot", 2);
+             setup.addUser(bot);
+            //Add users
+            ArrayList<List<TilesAndTokens>> botStarterTile = setup.setStarterHabitatTile(bot);
+            ArrayList<List<TilesAndTokens>> botHabitatTiles = setup.habitatTiles();
+            ArrayList<List<TilesAndTokens>> botWildlifeTokens = setup.wildlifeTokens();
+            allStarterTiles.add(botStarterTile);
+            allHabitatTiles.add(botHabitatTiles);
+            allWildlifeTokens.add(botWildlifeTokens);
+
+
 
         turnCounter = setup.turnCalculation();
 
@@ -62,7 +78,17 @@ public class Main
         {
             // Allow the users to take turns playing the game
             User currentUser = setup.getUserByTurn(turnCounter);
-            choice = setup.takeTurn(scan, turnCounter);
+            if(currentUser.getName()=="Bot")
+            {
+
+                System.out.println("It is Now the Bot's Turn");
+                choice=Bot.getTurnChoice();
+            }
+            else
+            {
+                choice = setup.takeTurn(scan, turnCounter);
+            }
+
 
             //Print out the name of the current persons turn and what turn it is
             switch(choice) {
@@ -98,7 +124,18 @@ public class Main
                         setup.replacePairs(currentHabitatTiles, replacedTokens1, selectedTileAndToken);
                     } else if (setup.optionalCull(currentWildlifeTokens)) {
                         System.out.println("You have the option to execute a cull (y/n)");
-                        String in = scan.next();
+                        if(currentUser.getName()=="Bot")
+                        {
+
+
+                            in=Bot.getCullChoice();
+                        }
+                        else
+                        {
+                             in = scan.next();
+                        }
+
+
                         if (in.equalsIgnoreCase("y")) {
                             replacedTokens2 = setup.wildlifeTokens();
                             currentWildlifeTokens = replacedTokens2;
@@ -134,7 +171,7 @@ public class Main
                     System.out.println("Enter column number: ");
                     int column = scan.nextInt();
 
-                   // Board.placeTile(board, starterTile, 25, 25);
+                    // Board.placeTile(board, starterTile, 25, 25);
                     String[][] tile = HabitatTiles.convertTileToDisplay(tileChosen);
                     Board.placeTile(board, tile, row, column);
                     Board.printBoard(board);
@@ -150,10 +187,10 @@ public class Main
                             break;
                         } else if (tokenChoice.equalsIgnoreCase("y")) {
                             String oldStr = "E";
-                           // int col = 0;
-                         //   int row = 0;
+                            // int col = 0;
+                            //   int row = 0;
 
-                           // Board.placeToken(board, tile, row, col, oldStr, currentUser);
+                            // Board.placeToken(board, tile, row, col, oldStr, currentUser);
                             Board.printBoard(board);
                             validInput = true;
                             // Continue with token placement code
