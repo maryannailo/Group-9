@@ -92,11 +92,11 @@ public class Setup
 
         // add 100 possible wildlife tokens (20 * 5)
         for (int i = 0; i < 20; i++) {
-            wildlifeTokens.add(TilesAndTokens.HAWK);
-            wildlifeTokens.add(TilesAndTokens.BEAR);
-            wildlifeTokens.add(TilesAndTokens.ELK);
-            wildlifeTokens.add(TilesAndTokens.SALMON);
-            wildlifeTokens.add(TilesAndTokens.FOX);
+            wildlifeTokens.add(TilesAndTokens.HAWKTOKEN);
+            wildlifeTokens.add(TilesAndTokens.BEARTOKEN);
+            wildlifeTokens.add(TilesAndTokens.ELKTOKEN);
+            wildlifeTokens.add(TilesAndTokens.SALMONTOKEN);
+            wildlifeTokens.add(TilesAndTokens.FOXTOKEN);
         }
 
         Collections.shuffle(wildlifeTokens);
