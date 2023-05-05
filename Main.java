@@ -11,6 +11,7 @@ public class Main
         display.displayWelcome();
 
         Scanner scan = new Scanner(System.in);
+        String[][][] board = new String[50][50][50];
         int choice = 0;
         String name;
         int turnCounter;
@@ -115,6 +116,17 @@ public class Main
 
                         setup.replacePairs(currentHabitatTiles, currentWildlifeTokens, selectedTileAndToken);
                     }
+                    System.out.println("Where do you want to place " + tileChosen);
+                    System.out.println("Enter row number: ");
+                    int row = scan.nextInt();
+                    System.out.println("Enter column number: ");
+                    int column = scan.nextInt();
+
+                   // Board.placeTile(board, starterTile, 25, 25);
+                    String[][] tile = HabitatTiles.convertToDisplay(tileChosen);
+                    Board.placeTile(board, tile, row, column);
+                    Board.printBoard(board);
+
 
                     // Allow the user not to place token
                     boolean validInput = false;
@@ -125,12 +137,12 @@ public class Main
                             // Do not place token
                             break;
                         } else if (tokenChoice.equalsIgnoreCase("y")) {
-                            String[][] tile = new String[][]{{tileChosen.toString()}};
-                            String oldStr = null;
-                            int col = 0;
-                            int row = 0;
-                            String[][][] board = new String[50][50][50];
-                            Board.placeToken(board, tile, row, col, oldStr, currentUser);
+                            String oldStr = "E";
+                           // int col = 0;
+                         //   int row = 0;
+
+                           // Board.placeToken(board, tile, row, col, oldStr, currentUser);
+                            Board.printBoard(board);
                             validInput = true;
                             // Continue with token placement code
                         } else {
