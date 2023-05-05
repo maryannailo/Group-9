@@ -525,6 +525,99 @@ public class HabitatTiles {
          System.out.println();
       }
    }
+  // Convert TilesAndTokens to String[][]
+    public static String[][] convertToDisplay(List<TilesAndTokens> tile) {
+        HashMap<String, String[][]> tileMap = new HashMap<>();
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.WETLAND, forestandwetland1);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.FOREST, forestandwetland2);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.WETLAND, forestandwetland3);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.FOREST, forestandwetland4);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.FOREST, forestandwetland5);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.RIVER, riverandforest1);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.FOREST, riverandforest2);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.RIVER, riverandforest3);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.FOREST, riverandforest4);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.RIVER, riverandforest5);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.MOUNTAIN, mountainandforest1);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.FOREST, mountainandforest2);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.MOUNTAIN, mountainandforest3);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.FOREST, mountainandforest4);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.MOUNTAIN, mountainandforest5);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.PRAIRIE, forestandPrairie1);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.FOREST, forestandPrairie2);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.PRAIRIE, forestandPrairie3);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.FOREST, forestandPrairie4);
+        tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.PRAIRIE, forestandPrairie5);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.RIVER, wetlandandriver1);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.WETLAND, wetlandandriver2);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.RIVER, wetlandandriver3);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.WETLAND, wetlandandriver4);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.RIVER, wetlandandriver5);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.MOUNTAIN, wetlandandmountain1);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.WETLAND, wetlandandmountain2);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.MOUNTAIN, wetlandandmountain3);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.WETLAND, wetlandandmountain4);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.MOUNTAIN, wetlandandmountain5);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.PRAIRIE, wetlandandprairie1);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.WETLAND, wetlandandprairie2);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.PRAIRIE, wetlandandprairie3);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.WETLAND, wetlandandprairie4);
+        tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.PRAIRIE, wetlandandprairie5);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.MOUNTAIN, mountainandriver1);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.RIVER, mountainandriver2);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.MOUNTAIN, mountainandriver3);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.RIVER, mountainandriver4);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.MOUNTAIN, mountainandriver5);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.PRAIRIE, prairieandriver1);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.RIVER, prairieandriver2);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.PRAIRIE, prairieandriver3);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.RIVER, prairieandriver4);
+        tileMap.put(TilesAndTokens.RIVER + "," + TilesAndTokens.PRAIRIE, prairieandriver5);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.PRAIRIE, prairieandmountain1);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.MOUNTAIN, prairieandmountain2);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.PRAIRIE, prairieandmountain3);
+        tileMap.put(TilesAndTokens.PRAIRIE + "," + TilesAndTokens.MOUNTAIN, prairieandmountain4);
+        tileMap.put(TilesAndTokens.MOUNTAIN + "," + TilesAndTokens.PRAIRIE, prairieandmountain5);
+
+        String[][] display = new String[2][2];
+            if (tile.size() == 2) {
+                String key = tile.get(0) + "," + tile.get(1);
+                display = tileMap.get(key);
+            } else if (tile.size() == 1) {
+                if (tile.get(0) == TilesAndTokens.FORESTKEY) {
+                    display = forest1;
+                } else if (tile.get(0) == TilesAndTokens.WETLANDKEY) {
+                    display = wetland1;
+                } else if (tile.get(0) == TilesAndTokens.RIVERKEY) {
+                    display = river1;
+                } else if (tile.get(0) == TilesAndTokens.MOUNTAINKEY) {
+                    display = mountain1;
+                } else if (tile.get(0) == TilesAndTokens.PRAIRIEKEY) {
+                    display = prairie1;
+                } else if (tile.get(0) == TilesAndTokens.FORESTKEY) {
+                    display = forest2;
+                } else if (tile.get(0) == TilesAndTokens.WETLANDKEY) {
+                    display = wetland2;
+                } else if (tile.get(0) == TilesAndTokens.RIVERKEY) {
+                    display = river2;
+                } else if (tile.get(0) == TilesAndTokens.MOUNTAINKEY) {
+                    display = mountain2;
+                } else if (tile.get(0) == TilesAndTokens.PRAIRIEKEY) {
+                    display = prairie2;
+                } else if (tile.get(0) == TilesAndTokens.FORESTKEY) {
+                    display = forest3;
+                } else if (tile.get(0) == TilesAndTokens.WETLANDKEY) {
+                    display = wetland3;
+                } else if (tile.get(0) == TilesAndTokens.RIVERKEY) {
+                    display = river3;
+                } else if (tile.get(0) == TilesAndTokens.MOUNTAINKEY) {
+                    display = mountain3;
+                } else if (tile.get(0) == TilesAndTokens.PRAIRIEKEY) {
+                    display = prairie3;
+                }
+            }
+        return display;
+    }
 
 }
 
