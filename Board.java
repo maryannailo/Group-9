@@ -1,5 +1,5 @@
 public class Board {
-    public static void printBoard(String[][][] board, User user) {
+    public static void printBoard(String[][][] board) {
         int numRows = board.length;
         int numCols = board[0].length;
 
