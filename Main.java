@@ -24,23 +24,8 @@ public class Main
         List<ArrayList<List<TilesAndTokens>>> allHabitatTiles = new ArrayList<>();
         List<ArrayList<List<TilesAndTokens>>> allWildlifeTokens = new ArrayList<>();
 
-        while (numPlayers < 2 || numPlayers > 4) {
-            //Add Error handling in case input is not between 2 and 4
-            System.out.println("Please enter the Number of Players playing 2-4:");
-            try {
-                numPlayers = scan.nextInt();
-                scan.nextLine(); // to clear input buffer
-                if (numPlayers < 2 || numPlayers > 4) {
-                    throw new NumberFormatException();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input.");
-            }
-        }
-
-        System.out.println("Please enter player 1's name:");
+        System.out.println("Please enter player's name:");
         name = scan.nextLine();
-
 
         User user = new User(name, 1);
         setup.addUser(user);
@@ -183,7 +168,7 @@ public class Main
                         } else if (tokenChoice.equalsIgnoreCase("y")) {
                             String oldStr = "E";
                            // int col = 0;
-                         //   int row = 0;
+                           // int row = 0;
 
                            // Board.placeToken(board, tile, row, col, oldStr, currentUser);
                             Board.printBoard(board, currentUser);
