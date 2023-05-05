@@ -528,7 +528,7 @@ public class HabitatTiles {
         }
     }
     // Convert TilesAndTokens to String[][]
-    public static String[][] convertToDisplay(List<TilesAndTokens> tile) {
+    public static String[][] convertTileToDisplay(List<TilesAndTokens> tile) {
         HashMap<String, String[][]> tileMap = new HashMap<>();
         tileMap.put(TilesAndTokens.FOREST + "," + TilesAndTokens.WETLAND, forestandwetland1);
         tileMap.put(TilesAndTokens.WETLAND + "," + TilesAndTokens.FOREST, forestandwetland2);
@@ -621,6 +621,53 @@ public class HabitatTiles {
         return display;
     }
 
+    public static String[][] displayStarterTile(List<List<TilesAndTokens>> currentStarterTiles){
+        String[][] starterTile = new String[][]{};
+        List<List<TilesAndTokens>> prairieStarterTiles = new ArrayList<>();
+        prairieStarterTiles.add(Arrays.asList(TilesAndTokens.PRAIRIEKEY));
+        prairieStarterTiles.add(Arrays.asList(TilesAndTokens.WETLAND, TilesAndTokens.RIVER));
+        prairieStarterTiles.add(Arrays.asList(TilesAndTokens.FOREST, TilesAndTokens.MOUNTAIN));
+        List<List<TilesAndTokens>> forestStarterTiles = new ArrayList<>();
+        forestStarterTiles.add(Arrays.asList(TilesAndTokens.FORESTKEY));
+        forestStarterTiles.add(Arrays.asList(TilesAndTokens.MOUNTAIN, TilesAndTokens.RIVER));
+        forestStarterTiles.add(Arrays.asList(TilesAndTokens.WETLAND, TilesAndTokens.PRAIRIE));
+        List<List<TilesAndTokens>> riverStarterTiles = new ArrayList<>();
+        riverStarterTiles.add(Arrays.asList(TilesAndTokens.RIVERKEY));
+        riverStarterTiles.add(Arrays.asList(TilesAndTokens.PRAIRIE, TilesAndTokens.FOREST));
+        riverStarterTiles.add(Arrays.asList(TilesAndTokens.WETLAND, TilesAndTokens.PRAIRIE ));
+        List<List<TilesAndTokens>> wetlandStarterTiles = new ArrayList<>();
+        wetlandStarterTiles.add(Arrays.asList(TilesAndTokens.WETLANDKEY));
+        wetlandStarterTiles.add(Arrays.asList(TilesAndTokens.RIVER, TilesAndTokens.FOREST));
+        wetlandStarterTiles.add(Arrays.asList(TilesAndTokens.MOUNTAIN, TilesAndTokens.PRAIRIE));
+        List<List<TilesAndTokens>> mountainStarterTiles = new ArrayList<>();
+        mountainStarterTiles.add(Arrays.asList(TilesAndTokens.MOUNTAINKEY));
+        mountainStarterTiles.add(Arrays.asList(TilesAndTokens.FOREST, TilesAndTokens.WETLAND));
+        mountainStarterTiles.add(Arrays.asList(TilesAndTokens.RIVER, TilesAndTokens.PRAIRIE));
+        if (currentStarterTiles.equals(prairieStarterTiles)) {
+            starterTile = (HabitatTiles.starterhabitat5);
+        } else if (currentStarterTiles.equals(forestStarterTiles)) {
+            starterTile = (HabitatTiles.starterhabitat3);
+        } else if (currentStarterTiles.equals(riverStarterTiles)) {
+            starterTile = (HabitatTiles.starterhabitat4);
+        } else if (currentStarterTiles.equals(wetlandStarterTiles)) {
+            starterTile = (HabitatTiles.starterhabitat2);
+        } else if (currentStarterTiles.equals(mountainStarterTiles)) {
+            starterTile = (HabitatTiles.starterhabitat1);
+        } else {
+            System.out.println("this is not a starter habitat tile");
+        }
+        return starterTile;
+    }
+
+    public static ArrayList<String[][]> convertPlayersHabitatTilesToDisplay(ArrayList<List<TilesAndTokens>> tiles) {
+        String[][] habitatTiles = new String[][]{};
+        ArrayList<String[][]> test = new ArrayList<>();
+        for (List<TilesAndTokens> tile : tiles) {
+            habitatTiles = convertTileToDisplay(tile);
+            test.add(habitatTiles);
+        }
+        return test;
+    }
 }
 
 
